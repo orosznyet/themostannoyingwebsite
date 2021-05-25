@@ -1,4 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+The main idea is to collect all the disgusting features from today's website in one place.
+
+At the moment we are (plan to) supporting the following features:
+- Age confirmation
+- Endless toggles for GDPR settings
+- Chat bubble with incoming messages and notification sound
+- Randomly appearing newsletter subscription modal
+- Randomly appearing coupon modal
+- Asking for location notification (no worries, the website won't send any notification)
+- Asking for location permission (no worries, the website won't use your location)
+- Sticky video player obscuring the page visibility. (+audio)
+- "Read more" at the bottom of the article.
+- Randomly loading images while scrolling.
+- Low Quality images
+
+If you have anything to add, do not hesitate and **start your PR today, it's 100% off, ACT NOW!**
 
 ## Getting Started
 
@@ -14,21 +29,25 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Contribution
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Feel free to open PRs while trying to match the existing structure and formatting.
 
-## Learn More
+More details to come if the project reaches a certain traction.
+
+## Next.js
 
 To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Next.js Documentation]() - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The `main` branch will be automatically deployed to Netlify.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Support
+
+If you are eager to support me, throw a few coins at me on [BuyMeACoffee/onetdev](https://www.buymeacoffee.com/onetdev)
