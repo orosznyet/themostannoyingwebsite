@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "jpoissonnier.vscode-styled-components",
+        "editorconfig.editorconfig",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+    ]
+}
