@@ -2,7 +2,7 @@
  * @type {import('next').NextConfig}
  */
  const nextConfig = {
-  poweredByHeader: flase,
+  poweredByHeader: false,
 }
 
 module.exports = nextConfig
