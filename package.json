@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "dev-ssl": "node server.js"
   },
   "dependencies": {
     "@datapunt/matomo-tracker-react": "^0.5.1",
