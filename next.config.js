@@ -3,6 +3,7 @@
  */
  const nextConfig = {
   poweredByHeader: false,
+  swcMinify: true,
 }
 
 module.exports = nextConfig
