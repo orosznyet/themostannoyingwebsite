@@ -51,3 +51,7 @@ The `main` branch will be automatically deployed to Netlify.
 ## Support
 
 If you are eager to support me, throw a few coins at me on [BuyMeACoffee/onetdev](https://www.buymeacoffee.com/onetdev)
+
+## Credits 
+
+- Notification sound: https://github.com/akx/Notifications under licence CC0

@@ -1,8 +1,10 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import Head from 'next/head';
 import Footer from './Footer';
+import CookieBar from '../CookieBar';
+import ChatBubble from '../ChatBubble';
 
 const Layout = styled.div`
   min-height: 100vh;
@@ -25,6 +27,9 @@ export default function MainLayout({ children }: MainLayoutProps) {
       <Header />
       {children}
       <Footer />
+
+      <ChatBubble />
+      <CookieBar />
     </Layout>
   );
 }

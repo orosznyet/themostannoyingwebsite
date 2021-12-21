@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bonheur+Royale&display=swap');
 @import 'node_modules/modern-normalize/modern-normalize.css';
 
+/**
+ * IMPORTANT!!!
+ * You can find the theme related variables within the Theme component.
+ */
+
 :root {
   --font-size-small: 12px;
   --font-size-normal: 14px;
@@ -11,17 +16,6 @@
   Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   --header-font-family: Bonheur Royale, sans-serif;
   --gap: 10px;
-  --color-background: #001328;
-  --color-text: #fefefe;
-  --color-link: #7e16d3;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #fefefe;
-    --color-text: #001328;
-    --color-link: #7e16d3;
-  }
 }
 
 html,
@@ -29,10 +23,11 @@ body {
   font-family: var(--font-family);
   background: var(--color-background);
   color: var(--color-text);
+  transition: background 0.3s ease-in-out;
 }
 
 a, a:visited {
-  color: var(--color-text);
+  color: var(--color-link);
   text-decoration: none;
 }
 a:hover {

@@ -1,6 +1,6 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-const Header = () => {
+const MainMenu = () => {
   const links = [
     { path: '/', text: 'Home' },
     { path: '/hot-things', text: 'Hot things' },
@@ -9,10 +9,7 @@ const Header = () => {
   ];
 
   return (
-    <header>
-      <h1>
-        The <i>MAW</i>
-      </h1>
+    <nav id="menu-main">
       <ul>
         {links.map(({ path, text }, index) => (
           <li key={`menu${index}`}>
@@ -22,8 +19,8 @@ const Header = () => {
           </li>
         ))}
       </ul>
-    </header>
+    </nav>
   );
 };
 
-export default Header;
+export default MainMenu;
