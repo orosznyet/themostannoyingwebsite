@@ -1,17 +1,20 @@
 The main idea is to collect all the disgusting features from today's website in one place.
 
 At the moment we are (plan to) supporting the following features:
-- Age confirmation
-- Endless toggles for GDPR settings
-- Chat bubble with incoming messages and notification sound
-- Randomly appearing newsletter subscription modal
-- Randomly appearing coupon modal
-- Asking for location notification (no worries, the website won't send any notification)
-- Asking for location permission (no worries, the website won't use your location)
-- Sticky video player obscuring the page visibility. (+audio)
-- "Read more" at the bottom of the article.
-- Randomly loading images while scrolling.
-- Low Quality images
+- [x] Chat bubble with incoming messages and notification sound
+- [x] "Read more" at the bottom of the article.
+- [x] Marquee
+- [ ] Age verification on some images
+- [ ] Endless toggles for GDPR settings
+- [ ] Randomly appearing newsletter subscription modal
+- [ ] Randomly appearing coupon modal
+- [ ] Asking for notification (no worries, the website won't send any notification)
+- [ ] Asking for location permission (no worries, the website won't use your location)
+- [ ] Sticky video player obscuring the page visibility. (+audio)
+- [ ] Randomly loading images while scrolling.
+- [ ] Low Quality images
+- [ ] Funny, silly contents (like Onion news)
+- [ ] Design
 
 If you have anything to add, do not hesitate and **start your PR today, it's 100% off, ACT NOW!**
 
@@ -48,10 +51,11 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 The `main` branch will be automatically deployed to Netlify.
 
-## Support
+## Support the author
 
 If you are eager to support me, throw a few coins at me on [BuyMeACoffee/onetdev](https://www.buymeacoffee.com/onetdev)
 
 ## Credits 
 
 - Notification sound: https://github.com/akx/Notifications under licence CC0
+- Icons: https://fontawesome.com 
