@@ -130,7 +130,7 @@ const ChatBubble = () => {
   }, [])
 
   return (
-    <Wrap className={isOpen ? 'open' : 'closed'} onClick={(e) => e.stopPropagation() }>
+    <Wrap className={isOpen ? 'open' : 'closed'} onClick={(e) => e.stopPropagation()}>
       <IconWrap onClick={toggleHistory}>
         <FontAwesomeIcon icon={["fas", "comment-dots"]} />
         {badgeCounter > 0 && <IconBadge>{badgeCounter}</IconBadge>}
@@ -140,11 +140,11 @@ const ChatBubble = () => {
           {history.length > 0 && history
             .sort((a, b) => a.time.getTime() - b.time.getTime())
             .map((item, index) => (
-            <Message key={index} isUser={item.isUser}>
-              {item.text}<br />
-              <small><ReactTimeAgo date={item.time}/></small>
-            </Message>
-          ))}
+              <Message key={index} isUser={item.isUser}>
+                {item.text}<br />
+                <small><ReactTimeAgo date={item.time} /></small>
+              </Message>
+            ))}
           {history.length == 0 && <BotIsTyping>Is typing...</BotIsTyping>}
         </HistoryPager>
 

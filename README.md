@@ -1,3 +1,7 @@
+# The most annoying website 
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e13ea0d0-b77d-4307-a5a4-2e413461e3ad/deploy-status)](https://app.netlify.com/sites/themostannoyingwebsite/deploys)
+
 The main idea is to collect all the disgusting features from today's website in one place.
 
 At the moment we are (plan to) supporting the following features:
