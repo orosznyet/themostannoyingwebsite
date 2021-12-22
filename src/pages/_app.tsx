@@ -7,10 +7,11 @@ import { PersistGate } from 'redux-persist/integration/react';
 import persistor from '@/app/persistor';
 import Head from 'next/head';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCommentDots } from '@fortawesome/free-solid-svg-icons';
+import { faCommentDots, faTimes } from '@fortawesome/free-solid-svg-icons';
 import Theme from '@/components/layout/Theme';
 
 library.add(faCommentDots);
+library.add(faTimes);
 
 const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {
   return (
