@@ -1,8 +1,8 @@
 import useAudio from "@/hooks/useAudio";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FormEventHandler, MouseEventHandler, useEffect, useRef, useState } from "react";
-import ReactTimeAgo from "react-timeago";
+import { MouseEventHandler, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import History from "@/components/chat/History";
 
 const IconWrap = styled.div`
   cursor: pointer;
@@ -17,33 +17,20 @@ const IconBadge = styled.div`
   border: 50%;
 `;
 const HistoryWrap = styled.div`
-  display: none;
   position: absolute;
   bottom: 1rem;
   left: 3rem;
-  background: #ccc;
-  padding: var(--gap);
-  width: min(400px, 70vw);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s;
 `;
-const HistoryPager = styled.div`
-  max-height: min(300px, 50vh);
-  overflow: auto;
-`;
-const Message = styled.div<{ isUser: boolean }>`
-  background: ${({ isUser }) => (isUser ? "hsl(0, 0%, 90%)" : "hsl(0, 0%, 100%)")};
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  margin: 0.5rem 0;
-  ${({ isUser }) => isUser && "margin-left: 1rem"};
-  ${({ isUser }) => !isUser && "margin-right: 1rem"};
-`;
-const BotIsTyping = styled.div``;
 const Wrap = styled.div`
   position: fixed;
   left: 1rem;
   bottom: 1rem;
   &.open ${HistoryWrap} {
-    display: block;
+    visibility: visible;
+    opacity: 1;
   }
 `;
 
@@ -69,12 +56,10 @@ const initialMessage = () => ({
  * Every time the user closes the chat bubble, we should add a new message
  * to the history now with a notification sound.
  */
-const ChatBubble = () => {
+const Bubble = () => {
   const [history, setHistory] = useState([initialMessage()] as HistoryItem[]);
   const [isOpen, setIsOpen] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);
-  const userForm = useRef<HTMLFormElement>(null);
-  const userMessage = useRef<HTMLInputElement>(null);
   const notificationSfx = useAudio("/assets/sfx/notification_chord1.wav");
 
   const addHistory = (message: string, isUser: boolean) => {
@@ -95,15 +80,6 @@ const ChatBubble = () => {
       } catch (e) {
         console.error(e);
       }
-    }
-  }
-
-  const handleFormSubmit: FormEventHandler = (e) => {
-    e.preventDefault();
-    const message = userMessage.current?.value;
-    if (message) {
-      addHistory(message, true);
-      userForm.current?.reset()
     }
   }
 
@@ -136,25 +112,13 @@ const ChatBubble = () => {
         {badgeCounter > 0 && <IconBadge>{badgeCounter}</IconBadge>}
       </IconWrap>
       <HistoryWrap>
-        <HistoryPager>
-          {history.length > 0 && history
-            .sort((a, b) => a.time.getTime() - b.time.getTime())
-            .map((item, index) => (
-              <Message key={index} isUser={item.isUser}>
-                {item.text}<br />
-                <small><ReactTimeAgo date={item.time} /></small>
-              </Message>
-            ))}
-          {history.length == 0 && <BotIsTyping>Is typing...</BotIsTyping>}
-        </HistoryPager>
-
-        <form onSubmit={handleFormSubmit} ref={userForm}>
-          <input name="message" ref={userMessage} />
-          <button type="submit">Send</button>
-        </form>
+        <History
+          history={history}
+          onUserMessage={(message) => addHistory(message, true)}
+          />
       </HistoryWrap>
     </Wrap>
   );
 }
 
-export default ChatBubble;
+export default Bubble;

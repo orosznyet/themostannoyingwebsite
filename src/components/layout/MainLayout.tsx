@@ -4,7 +4,7 @@ import Header from './Header';
 import Head from 'next/head';
 import Footer from './Footer';
 import CookieBar from '../CookieBar';
-import ChatBubble from '../ChatBubble';
+import ChatBubble from '../chat/Bubble';
 
 const Layout = styled.div`
   min-height: 100vh;
