@@ -8,6 +8,7 @@ At the moment we are (plan to) supporting the following features:
 - [x] Chat bubble with incoming messages and notification sound
 - [x] "Read more" at the bottom of the article.
 - [x] Marquee
+- [x] Wheel of fortune coupon modal
 - [ ] Age verification on some images
 - [ ] Endless toggles for GDPR settings
 - [ ] Randomly appearing newsletter subscription modal

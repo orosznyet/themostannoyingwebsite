@@ -25,6 +25,7 @@ const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {
         <MatomoProvider>
           <Head>
             <title>The Most Annoying Website</title>
+            <link rel="icon" type="image/png" href="/favicon.png" />
           </Head>
           <Theme>
             <MainLayout>

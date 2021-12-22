@@ -12,11 +12,7 @@ const Header = () => {
   return (
     <header>
       <Link href="/">
-        <Title>
-          <a>
-          The <i>MAW</i>
-          </a>
-        </Title>
+        <Title><a>The <i>MAW</i></a></Title>
       </Link>
       <DarkModeToggle />
       <MainMenu />
