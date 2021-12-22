@@ -1,7 +1,7 @@
 import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit'
-import appearanceReducer from '@/features/appearance'
-import consentReducer from '@/features/consent'
-import runtimeReducer from '@/features/runtime'
+import appearanceReducer from '@/redux/stores/appearance'
+import consentReducer from '@/redux/stores/consent'
+import runtimeReducer from '@/redux/stores/runtime'
 
 export const rootReducer = combineReducers({
   appearance: appearanceReducer,

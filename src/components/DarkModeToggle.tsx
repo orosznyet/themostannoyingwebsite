@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { selectDarkMode, setDarkMode } from "@/features/appearance";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { selectDarkMode, setDarkMode } from "@/redux/stores/appearance";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 const SelectorOption = styled.span`
   cursor: pointer;

@@ -4,7 +4,7 @@ import MainLayout from '@/components/master/MainLayout';
 import MatomoProvider from '@/components/analitics/MatomoProvider';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import persistor from '@/app/persistor';
+import persistor from '@/redux/persistor';
 import Head from 'next/head';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCommentDots, faTimes } from '@fortawesome/free-solid-svg-icons';

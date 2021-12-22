@@ -1,5 +1,5 @@
-import { PersistedStoreType } from "@/app/persistor";
-import { setHasInteracted } from "@/features/runtime";
+import { PersistedStoreType } from "@/redux/persistor";
+import { setHasInteracted } from "@/redux/stores/runtime";
 import { useEffect, useState } from "react";
 
 /**

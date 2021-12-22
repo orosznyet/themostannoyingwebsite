@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { selectReviewCompleted, setReviewCompleted } from "@/features/consent";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { selectReviewCompleted, setReviewCompleted } from "@/redux/stores/consent";
 import styled from "styled-components";
 
 const Wrap = styled.div`

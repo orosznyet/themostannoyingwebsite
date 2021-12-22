@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MouseEventHandler, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import History from "@/components/chat/History";
-import { useAppSelector } from "@/app/hooks";
-import { selectHasInteracted } from "@/features/runtime";
+import { useAppSelector } from "@/redux/hooks";
+import { selectHasInteracted } from "@/redux/stores/runtime";
 
 const IconWrap = styled.div`
   cursor: pointer;
