@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import DarkModeToggle from '../DarkModeToggle';
 import Marquee from '../navigation/Marquee';
-import MainMenu from '../navigation/MainNavigation';
+import MainNavigation from '../navigation/MainNavigation';
 import Link from 'next/link';
+import UserNavigation from '../navigation/UserNavigation';
 
 const Title = styled.h1`
   margin: 0;
@@ -15,7 +16,8 @@ const Header = () => {
         <Title><a>The <i>MAW</i></a></Title>
       </Link>
       <DarkModeToggle />
-      <MainMenu />
+      <MainNavigation />
+      <UserNavigation />
       <Marquee />
     </header>
   );

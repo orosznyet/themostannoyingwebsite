@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const MainMenu = () => {
+const MainNavigation = () => {
   const links = [
     { path: '/', text: 'Home' },
     { path: '/hot-things', text: 'Hot things' },
@@ -9,10 +9,10 @@ const MainMenu = () => {
   ];
 
   return (
-    <nav id="menu-main">
+    <nav id="navigation-main">
       <ul>
         {links.map(({ path, text }, index) => (
-          <li key={`menu${index}`}>
+          <li key={index}>
             <Link href={path}>
               <a>{text}</a>
             </Link>
@@ -23,4 +23,4 @@ const MainMenu = () => {
   );
 };
 
-export default MainMenu;
+export default MainNavigation;
