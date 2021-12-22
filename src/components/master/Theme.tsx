@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/app/hooks";
-import { selectDarkModeSelector } from "@/features/appearance";
+import { selectDarkMode } from "@/features/appearance";
 import { createGlobalStyle } from "styled-components"
 
 // Using styled-components provided theme is great and all but I'm losing
@@ -29,7 +29,7 @@ type Props = {
 }
 
 const Theme = ({ children }: Props) => {
-  const isDarkMode = useAppSelector(selectDarkModeSelector);
+  const isDarkMode = useAppSelector(selectDarkMode);
 
   return <>
     {isDarkMode && <DarkTheme />}

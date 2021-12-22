@@ -7,11 +7,13 @@ const persistedReducer = persistReducer({
   version: 1,
   key: 'root',
   storage,
-  whitelist: ['appearance', 'consent'],
+  blacklist: ['runtime'],
   debug: true,
 }, rootReducer)
 
 const store = createStore(persistedReducer)
 const persistor = persistStore(store)
+
+export type PersistedStoreType = typeof store
 
 export default { store, persistor }

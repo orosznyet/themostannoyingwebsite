@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit'
 import appearanceReducer from '@/features/appearance'
 import consentReducer from '@/features/consent'
+import runtimeReducer from '@/features/runtime'
 
 export const rootReducer = combineReducers({
   appearance: appearanceReducer,
   consent: consentReducer,
+  runtime: runtimeReducer,
 })
 
 export function makeStore() {

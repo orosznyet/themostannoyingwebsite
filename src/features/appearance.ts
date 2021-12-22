@@ -25,7 +25,10 @@ export const appearance = createSlice({
 })
 
 export const { setDarkMode, setAllowFlashing } = appearance.actions
-export const selectDarkModeSelector = (state: AppState) => state.appearance.isDarkMode
-export const selectAllowFlashing = (state: AppState) => state.appearance.allowFlashing
+
+export const selectDarkMode =
+  (state: AppState) => state.appearance.isDarkMode
+export const selectAllowFlashing =
+  (state: AppState) => state.appearance.allowFlashing
 
 export default appearance.reducer

@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MouseEventHandler, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import History from "@/components/chat/History";
+import { useAppSelector } from "@/app/hooks";
+import { selectHasInteracted } from "@/features/runtime";
 
 const IconWrap = styled.div`
   cursor: pointer;
@@ -61,6 +63,7 @@ const Bubble = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);
   const notificationSfx = useAudio("/assets/sfx/notification_chord1.wav");
+  const hasInteracted = useAppSelector(selectHasInteracted);
 
   const addHistory = (message: string, isUser: boolean) => {
     setHistory([...history, { text: message, isUser, time: new Date() }]);
@@ -92,11 +95,11 @@ const Bubble = () => {
   }
 
   useEffect(() => {
-    if (isOpen) { return; }
+    if (isOpen || !hasInteracted) { return; }
 
     const timer = setTimeout(() => addRandomBotMessage(), 3000);
     return () => clearTimeout(timer);
-  }, [isOpen]);
+  }, [isOpen, hasInteracted]);
 
   useEffect(() => {
     document.addEventListener("click", closeHistory)

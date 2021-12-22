@@ -41,9 +41,13 @@ export const {
   setAdultFilter
 } = consent.actions
 
-export const selectReviewCompleted = (state: AppState) => state.consent.reviewCompleted
-export const selectEnableCookies = (state: AppState) => state.consent.enableCookies
-export const selectEnableAnalytics = (state: AppState) => state.consent.enableAnalytics
-export const selectAdultFilter = (state: AppState) => state.consent.adultFilter
+export const selectReviewCompleted =
+  (state: AppState) => state.consent.reviewCompleted
+export const selectEnableCookies =
+  (state: AppState) => state.consent.enableCookies
+export const selectEnableAnalytics =
+  (state: AppState) => state.consent.enableAnalytics
+export const selectAdultFilter =
+  (state: AppState) => state.consent.adultFilter
 
 export default consent.reducer

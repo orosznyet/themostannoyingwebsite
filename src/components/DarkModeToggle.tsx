@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { selectDarkModeSelector, setDarkMode } from "@/features/appearance";
+import { selectDarkMode, setDarkMode } from "@/features/appearance";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 
 const SelectorOption = styled.span`
@@ -34,7 +34,7 @@ const Toggler = styled.div<{isDarkMode: boolean}>`
 
 const DarkModeToggle = () => {
   const dispatch = useAppDispatch()
-  const isDarkMode = useAppSelector(selectDarkModeSelector);
+  const isDarkMode = useAppSelector(selectDarkMode);
 
   const toggleDarkMode = () => {
     dispatch(setDarkMode(!isDarkMode));
