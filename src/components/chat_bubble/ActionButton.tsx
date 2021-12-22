@@ -7,16 +7,28 @@ import { useAppSelector } from "@/redux/hooks";
 import { selectHasInteracted } from "@/redux/stores/runtime";
 
 const IconWrap = styled.div`
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 4rem;
   height: 4rem;
-  background: blue;
+  cursor: pointer;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: 2rem;
   border-radius: 50%;
 `;
 const IconBadge = styled.div`
   position: absolute;
-  background: red;
-  border: 50%;
+  top: -5px;
+  right: -5px;
+  width: calc(var(--font-size-small) * 2);
+  padding: 5px;
+  font-size: var(--font-size-small);
+  text-align: center;
+  background: var(--color-error);
+  color: var(--color-on-error);
+  border-radius: 50%;
 `;
 const HistoryWrap = styled.div`
   position: absolute;
@@ -119,6 +131,7 @@ const ActionButton = () => {
         <History
           history={history}
           onUserMessage={(message) => addHistory(message, true)}
+          onClose={closeHistory}
           />
       </HistoryWrap>
     </Wrap>

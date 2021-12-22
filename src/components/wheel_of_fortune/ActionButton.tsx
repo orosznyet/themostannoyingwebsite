@@ -5,11 +5,6 @@ import GenericModal from "../modal/GenericModal";
 import Spinner from "./Spinner";
 import { Item } from "./Wheel";
 
-const Wrap = styled.div`
-  position: fixed;
-  left: 0;
-  top: 50%;
-`;
 const wiggleAnim = keyframes`
   0% { transform: rotate(0deg); }
   90% { transform: rotate(0deg); }
@@ -19,13 +14,19 @@ const wiggleAnim = keyframes`
   98% { transform: rotate(-8deg); }
   100% { transform: rotate(0deg); }
 `
+const Wrap = styled.div`
+  position: fixed;
+  left: 0;
+  top: 50%;
+`;
 const Icon = styled.div`
-  cursor: pointer;
-  font-size: 1.5rem;
-  background: red;
   padding: 1rem 1rem 1rem 3rem;
   margin-left: -3rem;
+  background: var(--color-error);
+  color: var(--color-on-error);
   opacity: 0.8;
+  cursor: pointer;
+  font-size: 1.5rem;
   transition: all 0.2s ease-in-out;
   animation-name: ${wiggleAnim};
   animation-duration: 8s;
@@ -38,7 +39,7 @@ const Icon = styled.div`
 const ModalContent = styled.div`
   width: 500px;
   height: 500px;
-  background: #fff;
+  background: var(--color-background);
 `;
 
 const items: Item[] = [

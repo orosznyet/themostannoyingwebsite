@@ -1,3 +1,5 @@
+import { useAppSelector } from "@/redux/hooks";
+import { selectDarkMode } from "@/redux/stores/appearance";
 import { useEffect } from "react";
 import styled from "styled-components";
 
@@ -17,7 +19,7 @@ const Dimmer = styled.div`
   width:100%;
   height: 100%;
   backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--color-dimmer);
   padding: 2rem 1rem;
   z-index: 10;
   justify-content: center;
