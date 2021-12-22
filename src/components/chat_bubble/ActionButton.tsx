@@ -2,7 +2,7 @@ import useAudio from "@/hooks/useAudio";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MouseEventHandler, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import History from "@/components/chat/History";
+import History from "@/components/chat_bubble/History";
 import { useAppSelector } from "@/redux/hooks";
 import { selectHasInteracted } from "@/redux/stores/runtime";
 
@@ -30,6 +30,7 @@ const Wrap = styled.div`
   position: fixed;
   left: 1rem;
   bottom: 1rem;
+  z-index: 5;
   &.open ${HistoryWrap} {
     visibility: visible;
     opacity: 1;
@@ -58,7 +59,7 @@ const initialMessage = () => ({
  * Every time the user closes the chat bubble, we should add a new message
  * to the history now with a notification sound.
  */
-const Bubble = () => {
+const ActionButton = () => {
   const [history, setHistory] = useState([initialMessage()] as HistoryItem[]);
   const [isOpen, setIsOpen] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);
@@ -124,4 +125,4 @@ const Bubble = () => {
   );
 }
 
-export default Bubble;
+export default ActionButton;

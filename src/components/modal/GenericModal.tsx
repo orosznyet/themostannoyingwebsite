@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import styled from "styled-components";
 
@@ -34,6 +33,11 @@ const Dimmer = styled.div`
   }
 `;
 
+/**
+ * Provides a modal window that can be used to display any type of content.
+ * Please note that unlike ActionModal, you'll have to prevent click propagation
+ * when using clickOutside.
+ */
 const GenericModal = ({
   children,
   show,
@@ -42,7 +46,7 @@ const GenericModal = ({
   closeOnClickOutside = true,
 }: Props) => {
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (show && closeOnEsc && e.key === "Escape") {
+    if (closeOnEsc && e.key === "Escape") {
       handleClose();
     }
   }
@@ -55,7 +59,7 @@ const GenericModal = ({
   return (
     <Dimmer
       className={show ? 'modal-show' : 'modal-hide'}
-      onClick={() => closeOnClickOutside ? handleClose : null}
+      onClick={() => closeOnClickOutside ? handleClose() : null}
       >
       {children}
     </Dimmer>

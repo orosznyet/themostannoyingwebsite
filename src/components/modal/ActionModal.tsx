@@ -47,7 +47,7 @@ const ActionModal = ({
 }: Props) => {
   return (
     <GenericModal {...proxiedProps} handleClose={handleClose}>
-      <Wrap>
+      <Wrap onClick={(e) => e.stopPropagation()}>
         <Header>
           <Title>{title}</Title>
           <CloseButton onClick={handleClose}>

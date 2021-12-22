@@ -7,12 +7,14 @@ import { PersistGate } from 'redux-persist/integration/react';
 import persistor from '@/redux/persistor';
 import Head from 'next/head';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCommentDots, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCommentDots, faMapMarkerAlt, faTags, faTimes } from '@fortawesome/free-solid-svg-icons';
 import Theme from '@/components/master/Theme';
 import useFirstInteraction from '@/hooks/useFirstInteraction';
 
 library.add(faCommentDots);
 library.add(faTimes);
+library.add(faTags);
+library.add(faMapMarkerAlt)
 
 const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {
   useFirstInteraction(persistor.store);

@@ -1,9 +1,4 @@
-import GenericModal from "@/components/modal/ActionModal";
-import { useState } from "react";
-
 export default function Index() {
-  const [show, setShow] = useState(false);
-
   return (
     <main>
       <h1>Lorem ipsum dolor sit, amet consectetur adipisicing elit. In, esse?</h1>
@@ -24,10 +19,6 @@ export default function Index() {
         dignissimos recusandae officiis in facilis. Voluptatibus facere eum, corrupti hic quaerat a expedita fugit
         repellendus! Inventore, perspiciatis. Repellendus, ex minima!
       </p>
-      <GenericModal title="Yooo" show={show} handleClose={() => setShow(false)}>
-        <p>Modal Test</p>
-      </GenericModal>
-      <button onClick={() => setShow(true)}>Open a modal</button>
     </main>
   );
 }

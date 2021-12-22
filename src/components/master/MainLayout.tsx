@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import Header from './Header';
 import Head from 'next/head';
 import Footer from './Footer';
-import CookieBar from '../CookieBar';
-import ChatBubble from '../chat/Bubble';
+import CookieBar from '@/components/CookieBar';
+import { ChatBubble } from '@/components/chat_bubble';
+import { WheelOfFortune } from '@/components/wheel_of_fortune';
 
 const Layout = styled.div`
   min-height: 100vh;
@@ -28,6 +29,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
       {children}
       <Footer />
 
+      <WheelOfFortune />
       <ChatBubble />
       <CookieBar />
     </Layout>
