@@ -10,6 +10,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCommentDots, faMapMarkerAlt, faTags, faTimes } from '@fortawesome/free-solid-svg-icons';
 import Theme from '@/components/master/Theme';
 import useFirstInteraction from '@/hooks/useFirstInteraction';
+import useInFocusMeter from '@/hooks/useInFocusMeter';
 
 library.add(faCommentDots);
 library.add(faTimes);
@@ -18,6 +19,7 @@ library.add(faMapMarkerAlt)
 
 const TheMostAnnoyingWebsite = ({ Component, pageProps }: AppProps) => {
   useFirstInteraction(persistor.store);
+  useInFocusMeter(persistor.store);
 
   return (
     <Provider store={persistor.store}>
