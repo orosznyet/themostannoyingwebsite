@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
 const FooterView = styled.footer`
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-tertiary);
   font-size: var(--font-size-small);
 `;
 

@@ -18,13 +18,13 @@ const Toggler = styled.div<{isDarkMode: boolean}>`
   width: 60px;
   height: 20px;
   user-select: none;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--color-secondary);
   border-radius: 10px;
   &:before {
     content: "";
     position: absolute;
     width: 50%;
-    background: #000;
+    background: var(--color-secondary);
     height: 100%;
     border-radius: 10px;
     transition: all 0.1s ease-in-out;
