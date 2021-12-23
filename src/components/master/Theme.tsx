@@ -11,7 +11,7 @@ import { createGlobalStyle } from "styled-components"
 // For more info:
 // https://material.io/design/color/the-color-system.html#color-theme-creation
 
-export const breakpoints = {
+const breakpoints = {
   xs: "0",
   sm: "576px",
   md: "768px",
@@ -86,6 +86,43 @@ const LightTheme = createGlobalStyle`
     --color-dimmer: #3a3a3abc;
   }
 `;
+
+// We get the benefits of the styled-components but also have runtime
+// css variable capabilities.
+export const cssVars = {
+  color: {
+    background: 'var(--color-background)',
+    primary: 'var(--color-primary)',
+    primaryAlt: 'var(--color-primary-alt)',
+    secondary: 'var(--color-secondary)',
+    secondaryAlt: 'var(--color-secondary-alt)',
+    tertiary: 'var(--color-tertiary)',
+    tertiaryAlt: 'var(--color-tertiary-alt)',
+    surface: 'var(--color-surface)',
+    error: 'var(--color-error)',
+    onPrimary: 'var(--color-on-primary)',
+    onSecondary: 'var(--color-on-secondary)',
+    onBackground: 'var(--color-on-background)',
+    onSurface: 'var(--color-on-surface)',
+    onError: 'var(--color-on-error)',
+    dimmer: 'var(--color-dimmer)',
+  },
+  fontFamily: {
+    primary: 'var(--font-family)',
+    secondary: 'var(--header-font-family)',
+  },
+  fontSize: {
+    small: 'var(--font-size-small)',
+    normal: 'var(--font-size-normal)',
+    large: 'var(--font-size-large)',
+    headline: 'var(--font-size-headline)',
+    title: 'var(--font-size-title)',
+  },
+  spacing: {
+    gap: 'var(--gap)',
+    gap2x: 'calc(var(--gap) * 2)',
+  },
+}
 
 type Props = {
   children: React.ReactNode
