@@ -1,40 +1,72 @@
+import { useAppSelector } from '@/redux/hooks';
+import { selectEnableFlashing } from '@/redux/stores/consent';
 import Link from 'next/link';
-import MarqueeWrap from "react-fast-marquee";
+import MarqueePlugin from "react-fast-marquee";
 import styled, { keyframes } from "styled-components"
+import { cssVars } from '../master/Theme';
 
 const flashingAnim = keyframes`
-  0% { background: hsla(360, 100%, 50%, 1); }
-  100% { background: hsla(360, 100%, 50%, 0); }
-`
-
-const FlashingText = styled.span`
+  0% { background: transparent; }
+  25% {
+    background: transparent;
+  }
+  30% {
+    background: ${cssVars.color.error};
+    color: ${cssVars.color.onError};
+  }
+  70% {
+    background: ${cssVars.color.error};
+    color: ${cssVars.color.onError};
+  }
+  75% { background: transparent; }
+  100% { background: transparent; }
+`;
+const highlightAnim = keyframes`
+  from { background: ${cssVars.color.error}; }
+  to { background: ${cssVars.color.error}; }
+`;
+const Wrap = styled.div`
+  font-size: ${cssVars.fontSize.large};
+`;
+const LinkText = styled.a<{ highlight: boolean, flashing: boolean }>`
   margin: 0 2rem;
   display: inline-block;
-  animation-name: ${flashingAnim};
-  animation-duration: 2s;
+  color: ${cssVars.color.background};
+  animation-name: ${({ highlight, flashing }) =>
+    highlight ? (flashing ? flashingAnim : highlightAnim) : ''
+  };
+  animation-duration: 1s;
   animation-iteration-count: infinite;
 `;
 
+const marqueeItems = [
+  {
+    path: '/articles/monkey-attack',
+    text: 'Breaking! A monkey attack on the internet',
+    highlight: true
+  },
+  {
+    path: '/articles/smelly-foot-breakout',
+    text: 'Smelly foot breakout in the new Mars colony',
+    highlight: false
+  },
+];
+
 const Marquee = () => {
-  const marqueeItems = [
-    {
-      path: '/articles/monkey-attack',
-      text: 'Breaking! A monkey attack on the internet'
-    },
-    {
-      path: '/articles/smelly-foot-breakout',
-      text: 'Smelly foot breakout in the new Mars colony'
-    },
-  ];
+  const flashing = useAppSelector(selectEnableFlashing);
 
   return (
-      <MarqueeWrap gradient={false}>
-        {marqueeItems.map(({ path, text }, index) => (
-          <Link href={path} key={index}>
-            <FlashingText>{text}</FlashingText>
+    <Wrap>
+      <MarqueePlugin gradient={false}>
+        {marqueeItems.map(({ path, text, highlight }, index) => (
+          <Link href={path} key={index} passHref>
+            <LinkText highlight={highlight} flashing={flashing}>
+              {text}
+            </LinkText>
           </Link>
         ))}
-      </MarqueeWrap>
+      </MarqueePlugin>
+    </Wrap>
   );
 };
 

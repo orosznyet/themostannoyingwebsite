@@ -5,6 +5,7 @@ import {
   setEnableAnalytics,
   setEnableCookies,
   setAdultFilter,
+  setEnableFlashing,
 } from "@/redux/stores/consent";
 import ReactTimeAgo from "react-timeago";
 import styled from "styled-components";
@@ -77,6 +78,17 @@ export default function PrivacyPolicy() {
                 name="adult_filter"
                 checked={consent.adultFilter}
                 onChange={() => dispatch(setAdultFilter(!consent.adultFilter))}
+              />
+            </label>
+          </p>
+          <p>
+            <label>
+              Flashing contents
+              <input
+                type="checkbox"
+                name="enable_flashing"
+                checked={consent.enableFlashing}
+                onChange={() => dispatch(setEnableFlashing(!consent.enableFlashing))}
               />
             </label>
           </p>
