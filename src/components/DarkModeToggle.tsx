@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { selectDarkMode, setDarkMode } from "@/redux/stores/appearance";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { cssVars } from "./master/Theme";
 
 const SelectorOption = styled.span`
   cursor: pointer;
@@ -18,13 +19,13 @@ const Toggler = styled.div<{isDarkMode: boolean}>`
   width: 60px;
   height: 20px;
   user-select: none;
-  border: 1px solid var(--color-secondary);
+  border: 1px solid ${cssVars.color.secondary};
   border-radius: 10px;
   &:before {
     content: "";
     position: absolute;
     width: 50%;
-    background: var(--color-secondary);
+    background: ${cssVars.color.secondary};
     height: 100%;
     border-radius: 10px;
     transition: all 0.1s ease-in-out;

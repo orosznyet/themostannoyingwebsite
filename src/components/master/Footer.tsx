@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { cssVars } from './Theme';
 
 const FooterView = styled.footer`
-  margin-top: 60px;
-  padding-top: 20px;
-  border-top: 1px solid var(--color-tertiary);
-  font-size: var(--font-size-small);
+  margin-top: calc(${cssVars.spacing.gap2x} * 3);
+  padding-top: ${cssVars.spacing.gap2x};
+  border-top: 1px solid ${cssVars.color.tertiary};
+  font-size: ${cssVars.fontSize.small};
 `;
 
 const Footer = () => {

@@ -1,4 +1,4 @@
-import { cssRule } from "@/components/master/Theme";
+import { cssRule, cssVars } from "@/components/master/Theme";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setDarkMode } from "@/redux/stores/appearance";
 import {
@@ -17,7 +17,7 @@ const Blocks = styled.div`
   }
 `;
 const Block = styled.div`
-  border: 1px solid var(--color-secondary);
+  border: 1px solid ${cssVars.color.secondary};
 `;
 
 export default function PrivacyPolicy() {

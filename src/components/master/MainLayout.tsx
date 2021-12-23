@@ -6,11 +6,12 @@ import Footer from './Footer';
 import CookieBar from '@/components/CookieBar';
 import { ChatBubble } from '@/components/chat_bubble';
 import { WheelOfFortune } from '@/components/wheel_of_fortune';
+import { cssVars } from './Theme';
 
 const Layout = styled.div`
   min-height: 100vh;
   max-width: 1024px;
-  padding: 0 var(--gap);
+  padding: 0 ${cssVars.spacing.gap};
   margin: 0 auto;
 `;
 

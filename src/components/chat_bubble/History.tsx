@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormEventHandler, useRef } from "react";
 import ReactTimeAgo from "react-timeago";
 import styled, { css } from "styled-components";
+import { cssVars } from "../master/Theme";
 
 export type HistoryItem = {
   text: string;
@@ -16,19 +17,19 @@ type Props = {
 }
 
 const Wrap = styled.div`
-  background: var(--color-surface);
+  background: ${cssVars.color.surface};
   width: min(400px, 70vw);
-  border-radius: var(--gap);
+  border-radius: ${cssVars.spacing.gap};
 `;
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: var(--gap);
-  padding-left: calc(var(--gap) * 2);
-  box-shadow: inset 0 -1px 0 0 var(--color-primary);
+  padding: ${cssVars.spacing.gap};
+  padding-left: ${cssVars.spacing.gap2x};
+  box-shadow: inset 0 -1px 0 0 ${cssVars.color.primary};
   h4 {
     margin: 0;
-    font-size: var(--font-size-large);
+    font-size: ${cssVars.fontSize.large};
     font-weight: bold;
   }
 `;
@@ -38,16 +39,16 @@ const CloseIcon = styled.div`
 const HistoryPager = styled.div`
   max-height: min(300px, 50vh);
   overflow: auto;
-  padding: var(--gap) calc(var(--gap) * 2);
+  padding: ${cssVars.spacing.gap} ${cssVars.spacing.gap2x};
 `;
 const BotMessage = css`
-  background: var(--color-primary);
-  color: var(--color-on-primary);
+  background: ${cssVars.color.primary};
+  color: ${cssVars.color.onPrimary};
   margin-right: 15px;
 `
 const UsserMessage = css`
-  background: var(--color-secondary);
-  color: var(--color-on-secondary);
+  background: ${cssVars.color.secondary};
+  color: ${cssVars.color.onSecondary};
   margin-left: 15px;
 `;
 
@@ -61,8 +62,8 @@ const Message = styled.div<{ isUser: boolean }>`
 const MessageTime = styled.small`
   position: absolute;
   bottom: -18px;
-  font-size: var(--font-size-small);
-  color: var(--color-on-background);
+  font-size: ${cssVars.fontSize.small};
+  color: ${cssVars.color.onBackground};
   opacity: 0.5;
 `;
 const BotIsTyping = styled.div`
@@ -71,9 +72,9 @@ const BotIsTyping = styled.div`
 const Form = styled.form`
   display: flex;
   justify-content: space-between;
-  box-shadow: inset 0 1px 0 0 var(--color-primary);
-  padding: var(--gap);
-  padding-left: calc(var(--gap) * 2);
+  box-shadow: inset 0 1px 0 0 ${cssVars.color.primary};
+  padding: ${cssVars.spacing.gap};
+  padding-left: ${cssVars.spacing.gap2x};
 `;
 
 const History = ({onUserMessage, history, onClose}: Props) => {

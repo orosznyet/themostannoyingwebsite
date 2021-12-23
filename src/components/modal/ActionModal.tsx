@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
+import { cssVars } from "../master/Theme";
 import GenericModal, { Props as GenericProps} from './GenericModal';
 
 type Props = GenericProps & {
@@ -8,18 +9,18 @@ type Props = GenericProps & {
 }
 
 const Wrap = styled.div`
-  background: var(--color-background);
+  background: ${cssVars.color.background};
   max-width: 100%;
   max-height: 100%;
   display: flex;
   flex-direction: column;
-  border-radius: var(--gap);
+  border-radius: ${cssVars.spacing.gap};
   min-width: min(400px, 100%);
 `;
 const Header = styled.div`
   display: flex;
   flex-direction: row;
-  padding: var(--gap) calc(var(--gap) * 2 );
+  padding: ${cssVars.spacing.gap} ${cssVars.spacing.gap2x};
   border-bottom: 1px solid red;
   font-size: 1.5rem;
   justify-content: space-between;
@@ -31,11 +32,11 @@ const CloseButton = styled.div`
   cursor: pointer;
 `;
 const Content = styled.div`
-  padding: var(--gap) calc(var(--gap) * 2 );
+  padding: ${cssVars.spacing.gap} ${cssVars.spacing.gap2x};
   overflow: auto;
 `;
 const Actions = styled.div`
-  padding: var(--gap) calc(var(--gap) * 2 );
+  padding: ${cssVars.spacing.gap} ${cssVars.spacing.gap2x};
 `;
 
 const ActionModal = ({

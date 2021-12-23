@@ -5,6 +5,7 @@ import styled from "styled-components";
 import History from "@/components/chat_bubble/History";
 import { useAppSelector } from "@/redux/hooks";
 import { selectHasInteracted } from "@/redux/stores/runtime";
+import { cssVars } from "../master/Theme";
 
 const IconWrap = styled.div`
   display: flex;
@@ -13,8 +14,8 @@ const IconWrap = styled.div`
   width: 4rem;
   height: 4rem;
   cursor: pointer;
-  background: var(--color-primary);
-  color: var(--color-on-primary);
+  background: ${cssVars.color.primary};
+  color: ${cssVars.color.onPrimary};
   font-size: 2rem;
   border-radius: 50%;
 `;
@@ -22,12 +23,12 @@ const IconBadge = styled.div`
   position: absolute;
   top: -5px;
   right: -5px;
-  width: calc(var(--font-size-small) * 2);
+  width: calc(${cssVars.fontSize.small} * 2);
   padding: 5px;
-  font-size: var(--font-size-small);
+  font-size: ${cssVars.fontSize.small};
   text-align: center;
-  background: var(--color-error);
-  color: var(--color-on-error);
+  background: ${cssVars.color.error};
+  color: ${cssVars.color.onError};
   border-radius: 50%;
 `;
 const HistoryWrap = styled.div`

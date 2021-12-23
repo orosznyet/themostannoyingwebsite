@@ -2,6 +2,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { selectDarkMode } from "@/redux/stores/appearance";
 import { useEffect } from "react";
 import styled from "styled-components";
+import { cssVars } from "../master/Theme";
 
 export type Props = {
   children: React.ReactChild,
@@ -19,7 +20,7 @@ const Dimmer = styled.div`
   width:100%;
   height: 100%;
   backdrop-filter: blur(10px);
-  background: var(--color-dimmer);
+  background: ${cssVars.color.dimmer};
   padding: 2rem 1rem;
   z-index: 10;
   justify-content: center;

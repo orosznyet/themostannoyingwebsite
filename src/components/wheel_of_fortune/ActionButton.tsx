@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
+import { cssVars } from "../master/Theme";
 import GenericModal from "../modal/GenericModal";
 import Spinner from "./Spinner";
 import { Item } from "./Wheel";
@@ -22,8 +23,8 @@ const Wrap = styled.div`
 const Icon = styled.div`
   padding: 1rem 1rem 1rem 3rem;
   margin-left: -3rem;
-  background: var(--color-error);
-  color: var(--color-on-error);
+  background: ${cssVars.color.error};
+  color: ${cssVars.color.onError};
   opacity: 0.8;
   cursor: pointer;
   font-size: 1.5rem;
@@ -39,7 +40,7 @@ const Icon = styled.div`
 const ModalContent = styled.div`
   width: 500px;
   height: 500px;
-  background: var(--color-background);
+  background: ${cssVars.color.background};
 `;
 
 const items: Item[] = [
