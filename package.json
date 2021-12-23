@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "dev-ssl": "node server.js"
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "dev-ssl": "node server.js",
+    "type-check": "tsc --project tsconfig.json --pretty --noEmit",
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@datapunt/matomo-tracker-react": "^0.5.1",
@@ -37,6 +41,8 @@
     "eslint": "^7.32.0",
     "eslint-config-alloy": "^4.4.0",
     "eslint-plugin-react": "^7.27.1",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.3",
     "typescript": "^4.5.4"
   }
 }
