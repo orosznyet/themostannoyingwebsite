@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FormEventHandler, useRef } from "react";
+import { FormEventHandler, useEffect, useRef, useState } from "react";
 import ReactTimeAgo from "react-timeago";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { cssVars } from "../master/Theme";
 
 export type HistoryItem = {
@@ -16,6 +16,13 @@ type Props = {
   onClose: () => void;
 }
 
+const dotDotDotAnim = keyframes`
+  0% { content: '.'; }
+  25% { content: '..'; }
+  50% { content: '...'; }
+  75% { content: ''; }
+  100% { content: '.'; }
+`;
 const Wrap = styled.div`
   background: ${cssVars.color.surface};
   width: min(400px, 70vw);
@@ -67,7 +74,12 @@ const MessageTime = styled.small`
   opacity: 0.5;
 `;
 const BotIsTyping = styled.div`
+  font-size: ${cssVars.fontSize.normal};
   font-style: italic;
+  &:after {
+    content: '';
+    animation: ${dotDotDotAnim} 2s infinite;
+  }
 `;
 const Form = styled.form`
   display: flex;
@@ -76,10 +88,25 @@ const Form = styled.form`
   padding: ${cssVars.spacing.gap};
   padding-left: ${cssVars.spacing.gap2x};
 `;
+const Input = styled.input`
+  background: ${cssVars.color.surface};
+  color: ${cssVars.color.onSurface};
+  border: 1px solid ${cssVars.color.tertiary};
+  flex-grow: 1;
+`
+const Submit = styled.button`
+  background: ${cssVars.color.primary};
+  color: ${cssVars.color.onPrimary};
+  border: none;
+  border-radius: 0 10px 10px 0;
+  padding-right: 10px;
+`
 
 const History = ({onUserMessage, history, onClose}: Props) => {
+  const [showTyping, setShowTyping] = useState(true);
   const userForm = useRef<HTMLFormElement>(null);
   const userMessage = useRef<HTMLInputElement>(null);
+  const pagerRef = useRef<HTMLDivElement>(null);
 
   const handleFormSubmit: FormEventHandler = (e) => {
     e.preventDefault();
@@ -89,6 +116,17 @@ const History = ({onUserMessage, history, onClose}: Props) => {
       userForm.current?.reset()
     }
   }
+
+  useEffect(() => {
+    setShowTyping(history?.at(-1)?.isUser ?? false);
+  }, [history])
+
+  // We don't care about the current scroll position, this will force the user
+  // to always see the most recent messages.
+  useEffect(() => {
+    (pagerRef.current?.lastChild as HTMLSpanElement | undefined)?.
+      scrollIntoView({ behavior: "smooth" });
+  }, [history, showTyping])
 
   return (
     <Wrap>
@@ -101,7 +139,7 @@ const History = ({onUserMessage, history, onClose}: Props) => {
           <FontAwesomeIcon icon={['fas', 'times']} />
         </CloseIcon>
       </Header>
-      <HistoryPager>
+      <HistoryPager ref={pagerRef}>
         {history.length > 0 && history
           .sort((a, b) => a.time.getTime() - b.time.getTime())
           .map((item, index) => (
@@ -110,17 +148,18 @@ const History = ({onUserMessage, history, onClose}: Props) => {
               <MessageTime><ReactTimeAgo date={item.time} /></MessageTime>
             </Message>
           ))}
-        {history.length == 0 && <BotIsTyping>Is typing...</BotIsTyping>}
+        {showTyping && <BotIsTyping>Is typing</BotIsTyping>}
       </HistoryPager>
-
       <Form onSubmit={handleFormSubmit} ref={userForm}>
-        <input
+        <Input
           name="message"
           title="Your message"
           placeholder="Type here..."
           ref={userMessage}
         />
-        <button type="submit">Send</button>
+        <Submit type="submit">
+          <FontAwesomeIcon icon={['fas', 'paper-plane']} />
+        </Submit>
       </Form>
     </Wrap>
   );
