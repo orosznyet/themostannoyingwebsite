@@ -7,17 +7,9 @@ import { cssVars } from '../master/Theme';
 
 const flashingAnim = keyframes`
   0% { background: transparent; }
-  25% {
-    background: transparent;
-  }
-  30% {
-    background: ${cssVars.color.error};
-    color: ${cssVars.color.onError};
-  }
-  70% {
-    background: ${cssVars.color.error};
-    color: ${cssVars.color.onError};
-  }
+  25% { background: transparent; }
+  30% { background: ${cssVars.color.error}; }
+  70% { background: ${cssVars.color.error}; }
   75% { background: transparent; }
   100% { background: transparent; }
 `;
