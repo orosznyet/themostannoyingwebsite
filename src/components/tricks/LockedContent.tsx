@@ -40,7 +40,7 @@ const RevealButton = styled.button`
 const SmallPrint = styled.small`
   display: block;
   font-size: 0.5rem;
-  text-style: italic;
+  font-style: italic;
 `;
 
 const LockedContent = ({ children, initialMaxHeight, steps = 200 }: Props) => {

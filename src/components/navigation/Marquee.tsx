@@ -1,6 +1,8 @@
+import { useState } from 'react';
+import Link from 'next/link';
 import { useAppSelector } from '@/redux/hooks';
 import { selectEnableFlashing } from '@/redux/stores/consent';
-import Link from 'next/link';
+import ArticleService from '@/services/ArticleService';
 import MarqueePlugin from "react-fast-marquee";
 import styled, { keyframes } from "styled-components"
 import { cssVars } from '../master/Theme';
@@ -31,32 +33,21 @@ const LinkText = styled.a<{ highlight: boolean, flashing: boolean }>`
   animation-iteration-count: infinite;
 `;
 
-const marqueeItems = [
-  {
-    path: '/articles/monkey-attack',
-    text: 'Breaking! A monkey attack on the internet',
-    highlight: true
-  },
-  {
-    path: '/articles/smelly-foot-breakout',
-    text: 'Smelly foot breakout in the new Mars colony',
-    highlight: false
-  },
-];
-
 const Marquee = () => {
   const flashing = useAppSelector(selectEnableFlashing);
+  const [items] = useState(ArticleService.getAllFiltered({isHighlighted: true}));
 
   return (
     <Wrap>
       <MarqueePlugin gradient={false}>
-        {marqueeItems.map(({ path, text, highlight }, index) => (
-          <Link href={path} key={index} passHref>
-            <LinkText highlight={highlight} flashing={flashing}>
-              {text}
+        {items.map(({ slug, title }, index) => {
+          const path = '/articles/' + slug;
+          return <Link href={path} key={index} passHref>
+            <LinkText highlight flashing={flashing}>
+              {title}
             </LinkText>
           </Link>
-        ))}
+        })}
       </MarqueePlugin>
     </Wrap>
   );

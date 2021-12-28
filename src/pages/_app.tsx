@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import persistor from '@/redux/persistor';
 import Head from 'next/head';
-import registerIcons from '@/app/icons';
+import registerIcons from '@/utils/icons';
 import Theme from '@/components/master/Theme';
 import useFirstInteraction from '@/hooks/useFirstInteraction';
 import useInFocusMeter from '@/hooks/useInFocusMeter';
