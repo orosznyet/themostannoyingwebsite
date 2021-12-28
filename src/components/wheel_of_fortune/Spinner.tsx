@@ -44,11 +44,13 @@ const Button = styled.button`
     cursor: default;
   }
 `;
-const WheelAnimation = styled.div<{duration: number, rotation: number}>`
+const WheelAnimationWrap = styled.div`
   border: 2px solid #000;
   box-shadow: 0px 5px 10px #000;
   line-height: 0%;
   border-radius: 50%;
+`;
+const WheelAnimation = styled.div<{duration: number, rotation: number}>`
   transform: rotate(${props => props.rotation}deg);
   transition: transform ${props => props.duration}s cubic-bezier(0.33, 1, 0.68, 1);
 `;
@@ -90,9 +92,11 @@ const Spinner = ({ items, onSpinCompleted, revolutionPerSecond = 1 }: Props) => 
           <FontAwesomeIcon icon={["fas", "map-marker-alt"]} />
         </PointerWrap>
         <Button onClick={() => startSpin()} disabled={isSpinning}>SPIN!</Button>
-        <WheelAnimation duration={anim.duration} rotation={anim.rotation}>
-          <Wheel items={items} />
-        </WheelAnimation>
+        <WheelAnimationWrap>
+          <WheelAnimation duration={anim.duration} rotation={anim.rotation}>
+            <Wheel items={items} />
+          </WheelAnimation>
+        </WheelAnimationWrap>
       </WheelWrap>
       <Label>Win some stuff! Eyooooo, let it spin!!!</Label>
     </Wrap>
