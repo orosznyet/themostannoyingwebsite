@@ -17,3 +17,15 @@ export function midpoint(p1: Point, p2: Point): Point {
 export function radToDeg(rad: number): number {
   return rad * 180 / Math.PI
 }
+
+export const getWeightedRandom = <T>(items: {value: T, prob: number}[]): T | undefined => {
+  const total = items.reduce((carry, curent) => carry + curent.prob, 0)
+  const rand = random(0, total)
+  let sum = 0
+  for (let i = 0; i < items.length; i++) {
+    sum += items[i].prob
+    if (rand < sum) {
+      return items[i].value
+    }
+  }
+}
