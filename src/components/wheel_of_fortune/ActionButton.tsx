@@ -1,3 +1,4 @@
+import { getWeightedRandom } from "@/utils/math";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
@@ -42,25 +43,36 @@ const Icon = styled.div`
 `;
 const ModalContent = styled.div`
   width: 500px;
-  height: 500px;
-  background: ${cssVars.color.background};
+  background: ${cssVars.color.surface};
+  border-radius: 5px;
 `;
 
-const items: Item[] = [
-  {color: 'red', text: '#1'},
-  {color: 'blue', text: '#2'},
-  {color: 'green', text: '#3'},
-  {color: 'yellow', text: '#4'},
-  {color: 'orange', text: '#5'},
-  {color: 'purple', text: '#6'},
-  {color: 'pink', text: '#7'},
-  {color: 'brown', text: '#8'},
-  {color: 'black', text: '#9'},
-  {color: 'grey', text: '#10'},
-];
+const prizeWithWeight = [
+  {value: 'Free lifetime beer*', prob: 10},
+  {value: 'World peace*', prob: 1},
+  {value: 'Absolutelly nothing', prob: 100},
+  {value: 'Complimentary otter*', prob: 2},
+  {value: 'Fake 70% discount', prob: 50},
+]
+
+const getItems = (hueStart: number, hueEnd: number, numItems: number) => {
+  const items: Item[] = [];
+  const range = [hueStart, hueEnd].sort();
+  const step = (range[1] - range[0]) / numItems;
+  for (let i = 0; i < numItems; i++) {
+    items.push({
+      color: `hsl(${range[0] + i * step}, 100%, 50%)`,
+      text: getWeightedRandom(prizeWithWeight)!,
+    });
+  }
+
+  return items;
+}
 
 const ActionButton = () => {
+  const hueStart = 300; // random(0,360);
   const [isOpen, setIsOpen] = useState(false);
+  const [items] = useState(getItems(hueStart, hueStart + 120, 10));
 
   const onSpinHandler = (result: Item) => {
     console.log('Winner: ', result);
@@ -74,7 +86,10 @@ const ActionButton = () => {
         closeOnClickOutside
         closeOnEsc
       >
-        <ModalContent onClick={(e) => e.stopPropagation()}>
+        <ModalContent
+          onClick={(e) => e.stopPropagation()}
+          hidden={!isOpen}
+        >
           <Spinner
             items={items}
             onSpinCompleted={onSpinHandler}

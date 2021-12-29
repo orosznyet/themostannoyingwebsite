@@ -3,8 +3,10 @@ import { selectEnableFlashing } from '@/redux/stores/consent';
 import { random } from '@/utils/math';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
+import Confetti from 'react-confetti'
 import styled, { css, keyframes } from 'styled-components';
-import { cssVars } from '../master/Theme';
+import Button from '../form/Button';
+import { cssRule, cssVars } from '../master/Theme';
 import Wheel, { Item } from './Wheel';
 
 type Props = {
@@ -19,10 +21,7 @@ const SliceFlashing = keyframes`
   50% { filter: invert(0.5); }
   100% { filter: invert(0); }
 `;
-const Wrap = styled.div`
-  background: ${cssVars.color.surface};
-  color: ${cssVars.color.onSurface};
-`;
+const Wrap = styled.div``;
 const WheelWrap = styled.div`
   position: relative;
   max-width: 500px;
@@ -33,30 +32,36 @@ const PointerWrap = styled.div`
   position: absolute;
   top: 0;
   right: 50%;
-  color: #000;
+  color: ${cssVars.color.secondary};
   font-size: 50px;
   transform: translateX(15px);
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.4));
   z-index: 1;
+  ${cssRule.mdDown} {
+    font-size: 30px;
+    top: 13px;
+    transform: translateX(9px);
+  }
 `;
-const Button = styled.button`
-  cursor: pointer;
+const CtaButton = styled(Button)`
   position: absolute;
   top: 50%;
   left: 50%;
   width: 10%;
   height: 10%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
   z-index: 1;
-  &:disabled {
-    opacity: 1;
-    background: #fff;
-    cursor: default;
+  transform: translate(-50%, -50%);
+  border: 1px solid ${cssVars.color.secondary};
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  ${cssRule.mdDown} {
+    width: 30%;
+    border-radius: 5px;
   }
 `;
 const WheelAnimationWrap = styled.div`
-  border: 2px solid #000;
-  box-shadow: 0px 5px 10px #000;
+  border: 1px solid ${cssVars.color.secondary};
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.4);
   line-height: 0%;
   border-radius: 50%;
 `;
@@ -65,8 +70,8 @@ const WheelAnimation = styled.div<{
   rotation: number,
   allowFlashing: boolean,
 }>`
-  transform: rotate(${props => props.rotation}deg);
-  transition: transform ${props => props.duration}s cubic-bezier(0.33, 1, 0.68, 1);
+  transform: rotate(${props => `${props.rotation}deg`});
+  transition: transform ${props => `${props.duration}s`} cubic-bezier(0.33, 1, 0.68, 1);
   .slice-winner {
     animation: ${SliceFlashing} 500ms infinite;
     ${props => !props.allowFlashing && css`animation: none;`}
@@ -75,9 +80,15 @@ const WheelAnimation = styled.div<{
 const Label = styled.div`
   color: ${cssVars.color.onSurface};
   text-align: center;
+  font-weight: 600;
   font-size: ${cssVars.fontSize.title};
   padding: ${cssVars.spacing.gap2x};
   padding-top: 0;
+`;
+const ConfettiWrap = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
 `;
 
 export type SpinnerState = 'ready' | 'spinning' | 'completed';
@@ -93,11 +104,6 @@ const Spinner = ({
   const [state, setState] = useState<SpinnerState>('ready');
   const [winIndex, setWinIndex] = useState<number | undefined>(undefined);
   const degPerItem = 360 / items.length;
-
-  const getWinnerIndex = () => {
-    const modulo = (anim.rotation + 270) % 360;
-    return Math.floor(modulo / degPerItem);
-  }
 
   const startSpin = () => {
     if (state != 'ready') return;
@@ -119,7 +125,7 @@ const Spinner = ({
     if (state !== 'spinning') return;
     const interval = setTimeout(() => {
       setState('completed');
-      onSpinCompleted(items[getWinnerIndex()]);
+      onSpinCompleted(items[winIndex!]);
     }, anim.duration * 1000);
     return () => clearInterval(interval);
   }, [state])
@@ -128,11 +134,25 @@ const Spinner = ({
 
   return (
     <Wrap>
+      {state === 'completed' && <ConfettiWrap>
+        <Confetti
+          numberOfPieces={100}
+          width={500}
+          height={500}
+        />
+      </ConfettiWrap>
+      }
       <WheelWrap>
         <PointerWrap>
           <FontAwesomeIcon icon={["fas", "map-marker-alt"]} />
         </PointerWrap>
-        <Button onClick={() => startSpin()} disabled={state !== 'ready'}>SPIN!</Button>
+        <CtaButton
+          variant="tertiary"
+          onClick={() => startSpin()}
+          disabled={state !== 'ready'}
+        >
+          {state === 'ready' ? '🎲' : '🎉'}
+        </CtaButton>
         <WheelAnimationWrap>
           <WheelAnimation
             duration={anim.duration}
@@ -146,7 +166,12 @@ const Spinner = ({
           </WheelAnimation>
         </WheelAnimationWrap>
       </WheelWrap>
-      <Label>Win some stuff! Eyooooo, let it spin!!!</Label>
+      {state !== 'completed' &&
+        <Label>Let's spin the wheel!!</Label>
+      }
+      {state === 'completed' &&
+        <Label>You won! {items[winIndex!].text}</Label>
+      }
     </Wrap>
   )
 }
