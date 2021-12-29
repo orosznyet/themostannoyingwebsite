@@ -60,6 +60,7 @@ const DarkTheme = createGlobalStyle`
     --color-error: #f44336;
     --color-on-primary: #ffffff;
     --color-on-secondary: #000000;
+    --color-on-tertiary: #000000;
     --color-on-background: #fff;
     --color-on-surface: #fff;
     --color-on-error: #fff;
@@ -80,6 +81,7 @@ const LightTheme = createGlobalStyle`
     --color-error: #f44034;
     --color-on-primary: #fff;
     --color-on-secondary: #050416;
+    --color-on-tertiary: #050416;
     --color-on-background: #050416;
     --color-on-surface: #050416;
     --color-on-error: #050416;
@@ -102,6 +104,7 @@ export const cssVars = {
     error: 'var(--color-error)',
     onPrimary: 'var(--color-on-primary)',
     onSecondary: 'var(--color-on-secondary)',
+    onTertiary: 'var(--color-on-tertiary)',
     onBackground: 'var(--color-on-background)',
     onSurface: 'var(--color-on-surface)',
     onError: 'var(--color-on-error)',
