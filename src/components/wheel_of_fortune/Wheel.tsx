@@ -7,9 +7,10 @@ export type Item = {
 }
 type Props = {
   items: Item[];
+  highlightIndex?: number;
 }
 
-const Wheel = ({ items }: Props) => {
+const Wheel = ({ items, highlightIndex }: Props) => {
   const width = 500;
   const height = 500;
   const radius = Math.min(width, height) / 2;
@@ -27,7 +28,10 @@ const Wheel = ({ items }: Props) => {
       x: center.x + radius * Math.cos(startAngleRadians + sweepAngleRadians),
       y: center.y + radius * Math.sin(startAngleRadians + sweepAngleRadians),
     };
-    const abMidpoint = midpoint(aPoint, bPoint);
+    const abMidpoint = {
+      x: center.x + radius * 0.85 * Math.cos(startAngleRadians + sweepAngleRadians / 2),
+      y: center.y + radius * 0.85 * Math.sin(startAngleRadians + sweepAngleRadians / 2),
+    };
 
     let d = "";
     d += "M" + center.x + "," + center.y + " ";
@@ -41,7 +45,11 @@ const Wheel = ({ items }: Props) => {
 
     svgSlices.push(
       <g key={index}>
-        <path d={d} fill={item.color} />
+        <path
+          d={d}
+          fill={item.color}
+          className={highlightIndex == index ? 'slice-winner' : ''}
+        />
         <text
           textAnchor="end"
           x={abMidpoint.x}

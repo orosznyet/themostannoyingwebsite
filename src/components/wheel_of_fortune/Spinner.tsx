@@ -1,17 +1,27 @@
+import { useAppSelector } from '@/redux/hooks';
+import { selectEnableFlashing } from '@/redux/stores/consent';
 import { random } from '@/utils/math';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+import { cssVars } from '../master/Theme';
 import Wheel, { Item } from './Wheel';
 
 type Props = {
   items: Item[];
   onSpinCompleted: (result: Item) => void;
-  revolutionPerSecond?: number;
+  revDuration?: number;
+  revRange?: [number, number]
 }
 
+const SliceFlashing = keyframes`
+  0% { filter: invert(0); }
+  50% { filter: invert(0.5); }
+  100% { filter: invert(0); }
+`;
 const Wrap = styled.div`
-  background: #fff;
+  background: ${cssVars.color.surface};
+  color: ${cssVars.color.onSurface};
 `;
 const WheelWrap = styled.div`
   position: relative;
@@ -50,38 +60,69 @@ const WheelAnimationWrap = styled.div`
   line-height: 0%;
   border-radius: 50%;
 `;
-const WheelAnimation = styled.div<{duration: number, rotation: number}>`
+const WheelAnimation = styled.div<{
+  duration: number,
+  rotation: number,
+  allowFlashing: boolean,
+}>`
   transform: rotate(${props => props.rotation}deg);
   transition: transform ${props => props.duration}s cubic-bezier(0.33, 1, 0.68, 1);
+  .slice-winner {
+    animation: ${SliceFlashing} 500ms infinite;
+    ${props => !props.allowFlashing && css`animation: none;`}
+  }
 `;
 const Label = styled.div`
-  color: black;
+  color: ${cssVars.color.onSurface};
+  text-align: center;
+  font-size: ${cssVars.fontSize.title};
+  padding: ${cssVars.spacing.gap2x};
+  padding-top: 0;
 `;
 
-const Spinner = ({ items, onSpinCompleted, revolutionPerSecond = 1 }: Props) => {
-  const [anim, setAnim] = useState({rotation: 0, duration: 0});
-  const [isSpinning, setIsSpinning] = useState(false);
+export type SpinnerState = 'ready' | 'spinning' | 'completed';
 
-  const getWinnerData = (rotation: number) => {
-    const winnerIndex = Math.floor(rotation % 360 / (360 / items.length));
-    const winner = items[winnerIndex];
-    return winner;
+const Spinner = ({
+  items,
+  onSpinCompleted,
+  revDuration = 4,
+  revRange = [2, 6],
+}: Props) => {
+  const flashing = useAppSelector(selectEnableFlashing);
+  const [anim, setAnim] = useState({ rotation: 0, duration: 0 });
+  const [state, setState] = useState<SpinnerState>('ready');
+  const [winIndex, setWinIndex] = useState<number | undefined>(undefined);
+  const degPerItem = 360 / items.length;
+
+  const getWinnerIndex = () => {
+    const modulo = (anim.rotation + 270) % 360;
+    return Math.floor(modulo / degPerItem);
   }
 
   const startSpin = () => {
-    if (isSpinning) return;
-    const duration = random(4, 8);
-    setIsSpinning(true);
-    setAnim({duration, rotation: anim.rotation + 360 * revolutionPerSecond});
+    if (state != 'ready') return;
+    const dir = anim.rotation < 0 ? -1 : 1;
+    const revs = random(revRange[0], revRange[1]);
+    const revDeg = 360 * revs * dir;
+    const winIndex = random(0, items.length - 1);
+    const winDeg = (270 - (degPerItem / 2) - (degPerItem * winIndex)) * dir;
+
+    setState('spinning');
+    setWinIndex(winIndex);
+    setAnim({
+      duration: revDuration,
+      rotation: anim.rotation + revDeg + winDeg,
+    });
   }
 
   useEffect(() => {
-    if (!isSpinning) return;
+    if (state !== 'spinning') return;
     const interval = setTimeout(() => {
-      onSpinCompleted(getWinnerData(anim.rotation));
+      setState('completed');
+      onSpinCompleted(items[getWinnerIndex()]);
     }, anim.duration * 1000);
     return () => clearInterval(interval);
-  }, [isSpinning])
+  }, [state])
 
   // Todo: add draggable wheel
 
@@ -91,10 +132,17 @@ const Spinner = ({ items, onSpinCompleted, revolutionPerSecond = 1 }: Props) => 
         <PointerWrap>
           <FontAwesomeIcon icon={["fas", "map-marker-alt"]} />
         </PointerWrap>
-        <Button onClick={() => startSpin()} disabled={isSpinning}>SPIN!</Button>
+        <Button onClick={() => startSpin()} disabled={state !== 'ready'}>SPIN!</Button>
         <WheelAnimationWrap>
-          <WheelAnimation duration={anim.duration} rotation={anim.rotation}>
-            <Wheel items={items} />
+          <WheelAnimation
+            duration={anim.duration}
+            rotation={anim.rotation}
+            allowFlashing={flashing}
+          >
+            <Wheel
+              items={items}
+              highlightIndex={state === 'completed' ? winIndex : undefined}
+            />
           </WheelAnimation>
         </WheelAnimationWrap>
       </WheelWrap>

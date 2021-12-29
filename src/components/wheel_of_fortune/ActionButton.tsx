@@ -47,16 +47,16 @@ const ModalContent = styled.div`
 `;
 
 const items: Item[] = [
-  {color: 'red', text: 'One option'},
-  {color: 'blue', text: 'Two option'},
-  {color: 'green', text: 'Three option'},
-  {color: 'yellow', text: 'Four option'},
-  {color: 'orange', text: 'Five option'},
-  {color: 'purple', text: 'Six option'},
-  {color: 'pink', text: 'Seven option'},
-  {color: 'brown', text: 'Eight option'},
-  {color: 'black', text: 'Nine option'},
-  {color: 'grey', text: 'Ten option'},
+  {color: 'red', text: '#1'},
+  {color: 'blue', text: '#2'},
+  {color: 'green', text: '#3'},
+  {color: 'yellow', text: '#4'},
+  {color: 'orange', text: '#5'},
+  {color: 'purple', text: '#6'},
+  {color: 'pink', text: '#7'},
+  {color: 'brown', text: '#8'},
+  {color: 'black', text: '#9'},
+  {color: 'grey', text: '#10'},
 ];
 
 const ActionButton = () => {
@@ -78,7 +78,6 @@ const ActionButton = () => {
           <Spinner
             items={items}
             onSpinCompleted={onSpinHandler}
-            revolutionPerSecond={2}
           />
         </ModalContent>
       </GenericModal>
