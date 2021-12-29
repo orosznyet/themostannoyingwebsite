@@ -7,12 +7,15 @@ import { useAppSelector } from "@/redux/hooks";
 import { selectHasInteracted } from "@/redux/stores/runtime";
 import { cssVars } from "../master/Theme";
 
+const zIndexBase = 20;
+
 const IconWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 4rem;
   height: 4rem;
+  z-index: ${zIndexBase};
   cursor: pointer;
   background: ${cssVars.color.primary};
   color: ${cssVars.color.onPrimary};
@@ -25,6 +28,7 @@ const IconBadge = styled.div`
   right: -5px;
   width: calc(${cssVars.fontSize.small} * 2);
   padding: 5px;
+  z-index: ${zIndexBase + 1};
   font-size: ${cssVars.fontSize.small};
   text-align: center;
   background: ${cssVars.color.error};
@@ -36,6 +40,7 @@ const HistoryWrap = styled.div`
   bottom: 1rem;
   left: 3rem;
   visibility: hidden;
+  z-index: ${zIndexBase + 2};
   opacity: 0;
   transition: visibility 0.3s, opacity 0.3s;
 `;
@@ -43,7 +48,7 @@ const Wrap = styled.div`
   position: fixed;
   left: 1rem;
   bottom: 1rem;
-  z-index: 5;
+  z-index: ${zIndexBase};
   &.open ${HistoryWrap} {
     visibility: visible;
     opacity: 1;

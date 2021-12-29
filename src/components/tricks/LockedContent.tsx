@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
+import { cssVars } from "../master/Theme";
 import EscapingElement from "./EscapingElement";
 
 type Props = {
@@ -14,29 +15,24 @@ const Wrap = styled.div<{maxHeight: number}>`
   transition: max-height 0.3s ease-in-out;
   overflow: hidden;
 `
-
 const Overlay = styled.div<{isHidden: boolean}>`
   position: absolute;
   bottom: ${({isHidden}) => isHidden ? -500 : 0}px;
   opacity: ${({isHidden}) => isHidden ? 0 : 1};
   left: 0;
   width: 100%;
-  background: rgb(255,255,255);
-  background: linear-gradient(0deg, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
-  border: 0.5rem solid #000;
+  background: ${cssVars.color.surface};
+  background: linear-gradient(0deg, ${cssVars.color.background} 50%, transparent 100%);
   transition: all 0.3s ease-in-out;
 `;
-
 const PaymentButton = styled.button`
   cursor: pointer;
   background: red;
 `;
-
 const RevealButton = styled.button`
   cursor: pointer;
   font-size: 0.7rem;
 `;
-
 const SmallPrint = styled.small`
   display: block;
   font-size: 0.5rem;

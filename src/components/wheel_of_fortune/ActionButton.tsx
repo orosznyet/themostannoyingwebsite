@@ -6,6 +6,8 @@ import GenericModal from "../modal/GenericModal";
 import Spinner from "./Spinner";
 import { Item } from "./Wheel";
 
+const zIndexBase = 30;
+
 const wiggleAnim = keyframes`
   0% { transform: rotate(0deg); }
   90% { transform: rotate(0deg); }
@@ -19,6 +21,7 @@ const Wrap = styled.div`
   position: fixed;
   left: 0;
   top: 50%;
+  z-index: ${zIndexBase};
 `;
 const Icon = styled.div`
   padding: 1rem 1rem 1rem 3rem;

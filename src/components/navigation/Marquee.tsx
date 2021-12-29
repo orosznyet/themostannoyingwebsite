@@ -21,6 +21,7 @@ const highlightAnim = keyframes`
 `;
 const Wrap = styled.div`
   font-size: ${cssVars.fontSize.large};
+  z-index: 1;
 `;
 const LinkText = styled.a<{ highlight: boolean, flashing: boolean }>`
   margin: 0 2rem;

@@ -26,7 +26,7 @@ const PointerWrap = styled.div`
   color: #000;
   font-size: 50px;
   transform: translateX(15px);
-  z-index: 5;
+  z-index: 1;
 `;
 const Button = styled.button`
   cursor: pointer;
@@ -37,7 +37,7 @@ const Button = styled.button`
   height: 10%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  z-index: 2;
+  z-index: 1;
   &:disabled {
     opacity: 1;
     background: #fff;

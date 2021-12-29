@@ -4,9 +4,9 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { cssVars } from "./master/Theme";
 
 const SelectorOption = styled.span`
-  cursor: pointer;
-  z-index: 1;
   flex-grow: 1;
+  z-index: 1;
+  cursor: pointer;
   text-align: center;
 `;
 const InDarkMode = styled(SelectorOption)``;
