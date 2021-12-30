@@ -21,25 +21,35 @@ const SliceFlashing = keyframes`
   50% { filter: invert(0.5); }
   100% { filter: invert(0); }
 `;
+// TODO: this animation should be getting slower as the wheel itself spins
+// slower and slower, it looks silly now, but at least it moves.
+const PointerWiggle = keyframes`
+  0% { transform: rotate(0deg); }
+  30% { transform: rotate(-15deg); }
+  40% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+`;
 const Wrap = styled.div`
   position: relative;
   max-width: 500px;
   max-height: 500px;
   padding: 2rem;
 `;
-const PointerWrap = styled.div`
+const PointerWrap = styled.div<{wiggle: boolean}>`
   position: absolute;
   top: 0;
-  right: 50%;
+  right: calc(50% - 15px);
   color: ${cssVars.color.secondary};
   font-size: 50px;
-  transform: translateX(15px);
   filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.4));
   z-index: 1;
   ${cssRule.mdDown} {
     font-size: 30px;
     top: 13px;
-    transform: translateX(9px);
+    right: calc(50% - 9px);
+  }
+  ${({wiggle}) => wiggle &&
+    css`animation: ${PointerWiggle} 0.2s linear infinite;`
   }
 `;
 const CtaButton = styled(Button)`
@@ -71,6 +81,7 @@ const WheelAnimation = styled.div<{
 }>`
   transform: rotate(${props => `${props.rotation}deg`});
   transition: transform ${props => `${props.duration}s`} cubic-bezier(0.33, 1, 0.68, 1);
+  user-select: none;
   .slice-winner {
     animation: ${SliceFlashing} 500ms infinite;
     ${props => !props.allowFlashing && css`animation: none;`}
@@ -99,12 +110,7 @@ const AnimatedWheel = ({
     const revs = random(revRange[0], revRange[1]);
     const revDeg = 360 * revs * dir;
     const winIndex = random(0, items.length - 1);
-    let winDeg = 0;
-    if (dir > 0) {
-      winDeg = (270 - (degPerItem / 2) - (degPerItem * winIndex));
-    } else {
-      winDeg = (-90 - (degPerItem / 2) - (degPerItem * winIndex));
-    }
+    let winDeg = ((dir > 0 ? 270 : -90) - (degPerItem / 2) - (degPerItem * winIndex));
 
     setState('spinning');
     setWinIndex(winIndex);
@@ -147,7 +153,7 @@ const AnimatedWheel = ({
 
   return (
     <Wrap>
-      <PointerWrap>
+      <PointerWrap wiggle={state === 'spinning'}>
         <FontAwesomeIcon icon={["fas", "map-marker-alt"]} />
       </PointerWrap>
       <CtaButton

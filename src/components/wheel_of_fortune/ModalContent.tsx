@@ -1,12 +1,17 @@
 import { useAppSelector } from '@/redux/hooks';
 import { selectEnableFlashing } from '@/redux/stores/preference';
 import { getWeightedRandom, random } from '@/utils/math';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import Confetti from 'react-confetti'
 import styled from 'styled-components';
 import { cssVars } from '../master/Theme';
 import AnimatedWheel, { AnimatedWheelState } from './AnimatedWheel';
 import { Item } from './Wheel';
+
+type Props = {
+  onClose: () => void;
+}
 
 const Wrap = styled.div`
   background: ${cssVars.color.surface};
@@ -26,6 +31,13 @@ const ConfettiWrap = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
+`;
+const CloseIcon = styled.div`
+  position: absolute;
+  top: 0; right: 0;
+  padding: ${cssVars.spacing.gap};
+  cursor: pointer;
+  z-index: 1;
 `;
 
 const prizeWithWeight = [
@@ -50,7 +62,7 @@ const getItems = (hueStart: number, hueEnd: number, numItems: number) => {
   return items;
 }
 
-const ModalContent = () => {
+const ModalContent = ({ onClose }: Props) => {
   const flashing = useAppSelector(selectEnableFlashing);
   const hueStart = 300; // random(0,360);
   const [state, setState] = useState<AnimatedWheelState>('ready');
@@ -59,6 +71,9 @@ const ModalContent = () => {
 
   return (
     <Wrap>
+      <CloseIcon onClick={() => onClose()}>
+        <FontAwesomeIcon icon={['fas', 'times']} />
+      </CloseIcon>
       {state === 'completed' &&
         <ConfettiWrap>
           <Confetti

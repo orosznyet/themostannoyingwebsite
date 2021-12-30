@@ -1,11 +1,9 @@
-import { getWeightedRandom } from "@/utils/math";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { cssVars } from "../master/Theme";
 import GenericModal from "../modal/GenericModal";
 import ModalContent from "./ModalContent";
-import { Item } from "./Wheel";
 
 const zIndexBase = 30;
 
@@ -57,7 +55,7 @@ const ActionButton = () => {
           onClick={(e) => e.stopPropagation()}
           hidden={!isOpen}
         >
-          <ModalContent />
+          <ModalContent onClose={() => setIsOpen(false)} />
         </div>
       </GenericModal>
       <Icon onClick={() => setIsOpen(true)}>
