@@ -56,7 +56,7 @@ const DarkTheme = createGlobalStyle`
     --color-secondary-alt: #ffb300;
     --color-tertiary: #ff5722;
     --color-tertiary-alt: #ff5722;
-    --color-surface: #424242;
+    --color-surface: #141221;;
     --color-error: #f44336;
     --color-on-primary: #ffffff;
     --color-on-secondary: #000000;
