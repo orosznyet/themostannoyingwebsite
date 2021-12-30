@@ -9,10 +9,10 @@ At the moment we are (plan to) supporting the following features:
 - [x] "Read more" at the bottom of the article.
 - [x] Marquee
 - [x] Wheel of fortune coupon modal
+- [x] Add confirmation when trying to leave the page
 - [ ] Age verification on some images
 - [ ] Endless toggles for GDPR settings
 - [ ] Randomly appearing newsletter subscription modal
-- [ ] Randomly appearing coupon modal
 - [ ] Asking for notification (no worries, the website won't send any notification)
 - [ ] Asking for location permission (no worries, the website won't use your location)
 - [ ] Sticky video player obscuring the page visibility. (+audio)

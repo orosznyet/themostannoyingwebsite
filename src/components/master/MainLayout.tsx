@@ -7,6 +7,8 @@ import CookieBar from '@/components/CookieBar';
 import { ChatBubble } from '@/components/chat_bubble';
 import { WheelOfFortune } from '@/components/wheel_of_fortune';
 import { cssVars } from './Theme';
+import { useBeforeUnload } from 'react-use';
+import { useAppSelector } from '@/redux/hooks';
 
 const Layout = styled.div`
   min-height: 100vh;
@@ -20,6 +22,12 @@ interface MainLayoutProps {
 }
 
 export default function MainLayout({ children }: MainLayoutProps) {
+  const experience = useAppSelector(state => state.experience);
+  useBeforeUnload(
+    experience.exitPrompt,
+    `I'd reconsider leaving before some bad things happend to you. Are you sure?`
+  );
+
   return (
     <Layout>
       <Head>
@@ -30,8 +38,8 @@ export default function MainLayout({ children }: MainLayoutProps) {
       {children}
       <Footer />
 
-      <WheelOfFortune />
-      <ChatBubble />
+      {experience.wheelOfFortune && <WheelOfFortune />}
+      {experience.mockChat && <ChatBubble />}
       <CookieBar />
     </Layout>
   );
