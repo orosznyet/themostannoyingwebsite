@@ -1,6 +1,11 @@
 import Link from "next/link";
+import { Menu, MenuItem } from "./GenericMenu";
 
-const MainNavigation = () => {
+type Props = {
+  className?: string;
+}
+
+const MainNavigation = ({ className }: Props) => {
   const links = [
     { path: '/', text: 'Home' },
     { path: '/hot-things', text: 'Hot things' },
@@ -9,16 +14,16 @@ const MainNavigation = () => {
   ];
 
   return (
-    <nav id="navigation-main">
-      <ul>
+    <nav className={className} id="navigation-main">
+      <Menu>
         {links.map(({ path, text }, index) => (
-          <li key={index}>
+          <MenuItem key={index}>
             <Link href={path}>
               <a>{text}</a>
             </Link>
-          </li>
+          </MenuItem>
         ))}
-      </ul>
+      </Menu>
     </nav>
   );
 };

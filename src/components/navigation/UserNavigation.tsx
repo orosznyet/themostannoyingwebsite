@@ -1,26 +1,31 @@
 import Link from "next/link";
 import { useState } from "react";
 import ShareModal from "../modal/ShareModal";
+import { Menu, MenuItem } from "./GenericMenu";
 
-const UserNavigation = () => {
+type Props = {
+  className?: string;
+}
+
+const UserNavigation = ({ className }: Props) => {
   const [showShareModal, setShowShareModal] = useState(false);
 
   return (
-    <nav id="navigation-user">
+    <nav className={className} id="navigation-user">
       <ShareModal
         show={showShareModal}
         handleClose={() => setShowShareModal(false)}
       />
-      <ul>
-        <li>
+      <Menu>
+        <MenuItem>
           <Link href="/settings">
             <a>Settings</a>
           </Link>
-        </li>
-        <li>
+        </MenuItem>
+        <MenuItem>
           <span onClick={() => setShowShareModal(true)}>Share</span>
-        </li>
-      </ul>
+        </MenuItem>
+      </Menu>
     </nav>
   );
 };

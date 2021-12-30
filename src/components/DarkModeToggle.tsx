@@ -3,6 +3,10 @@ import { selectDarkMode, setDarkMode } from "@/redux/stores/preference";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { cssVars } from "./master/Theme";
 
+type Props = {
+  className?: string;
+}
+
 const SelectorOption = styled.span`
   flex-grow: 1;
   z-index: 1;
@@ -11,7 +15,6 @@ const SelectorOption = styled.span`
 `;
 const InDarkMode = styled(SelectorOption)``;
 const InDayMode = styled(SelectorOption)``;
-
 const Toggler = styled.div<{isDarkMode: boolean}>`
   position: relative;
   display: flex;
@@ -33,7 +36,7 @@ const Toggler = styled.div<{isDarkMode: boolean}>`
   }
 `;
 
-const DarkModeToggle = () => {
+const DarkModeToggle = ({ className }: Props) => {
   const dispatch = useAppDispatch()
   const isDarkMode = useAppSelector(selectDarkMode);
 
@@ -42,7 +45,11 @@ const DarkModeToggle = () => {
   };
 
   return (
-    <Toggler onClick={toggleDarkMode} isDarkMode={isDarkMode}>
+    <Toggler
+      className={className}
+      onClick={toggleDarkMode}
+      isDarkMode={isDarkMode}
+    >
       <InDayMode role="img" aria-label="sun">☀️</InDayMode>
       <InDarkMode role="img" aria-label="moon">🌙</InDarkMode>
     </Toggler>

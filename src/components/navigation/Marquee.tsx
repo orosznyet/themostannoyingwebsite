@@ -7,6 +7,10 @@ import MarqueePlugin from "react-fast-marquee";
 import styled, { keyframes } from "styled-components"
 import { cssVars } from '../master/Theme';
 
+type Props = {
+  className?: string;
+}
+
 const flashingAnim = keyframes`
   0% { background: transparent; }
   25% { background: transparent; }
@@ -34,13 +38,13 @@ const LinkText = styled.a<{ highlight: boolean, flashing: boolean }>`
   animation-iteration-count: infinite;
 `;
 
-const Marquee = () => {
+const Marquee = ({ className }: Props) => {
   const flashing = useAppSelector(selectEnableFlashing);
   const [items] = useState(ArticleService.getAllFiltered({isHighlighted: true}));
 
   return (
-    <Wrap>
-      <MarqueePlugin gradient={false}>
+    <Wrap className={className}>
+      <MarqueePlugin gradient={false} speed={100}>
         {items.map(({ slug, title }, index) => {
           const path = '/articles/' + slug;
           return <Link href={path} key={index} passHref>
