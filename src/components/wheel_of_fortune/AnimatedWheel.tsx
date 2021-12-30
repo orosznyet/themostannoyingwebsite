@@ -1,10 +1,8 @@
-import { useAppSelector } from '@/redux/hooks';
-import { selectEnableFlashing } from '@/redux/stores/preference';
-import { random } from '@/utils/math';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react';
-import Confetti from 'react-confetti'
+import { useEffect, useRef, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import useDragTracker from '@/hooks/useDragTracker';
+import { distance, random } from '@/utils/math';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../form/Button';
 import { cssRule, cssVars } from '../master/Theme';
 import Wheel, { Item } from './Wheel';
@@ -12,8 +10,10 @@ import Wheel, { Item } from './Wheel';
 type Props = {
   items: Item[];
   onSpinCompleted: (result: Item) => void;
+  onStateChange: (state: AnimatedWheelState) => void;
+  flashing?: boolean;
   revDuration?: number;
-  revRange?: [number, number]
+  revRange?: [number, number];
 }
 
 const SliceFlashing = keyframes`
@@ -21,8 +21,7 @@ const SliceFlashing = keyframes`
   50% { filter: invert(0.5); }
   100% { filter: invert(0); }
 `;
-const Wrap = styled.div``;
-const WheelWrap = styled.div`
+const Wrap = styled.div`
   position: relative;
   max-width: 500px;
   max-height: 500px;
@@ -77,32 +76,21 @@ const WheelAnimation = styled.div<{
     ${props => !props.allowFlashing && css`animation: none;`}
   }
 `;
-const Label = styled.div`
-  color: ${cssVars.color.onSurface};
-  text-align: center;
-  font-weight: 600;
-  font-size: ${cssVars.fontSize.title};
-  padding: ${cssVars.spacing.gap2x};
-  padding-top: 0;
-`;
-const ConfettiWrap = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-`;
 
-export type SpinnerState = 'ready' | 'spinning' | 'completed';
-
-const Spinner = ({
+export type AnimatedWheelState = 'ready' | 'spinning' | 'completed';
+const AnimatedWheel = ({
   items,
   onSpinCompleted,
+  onStateChange,
+  flashing = false,
   revDuration = 4,
   revRange = [2, 6],
 }: Props) => {
-  const flashing = useAppSelector(selectEnableFlashing);
   const [anim, setAnim] = useState({ rotation: 0, duration: 0 });
-  const [state, setState] = useState<SpinnerState>('ready');
+  const [state, setState] = useState<AnimatedWheelState>('ready');
   const [winIndex, setWinIndex] = useState<number | undefined>(undefined);
+  const rotatorRef = useRef<HTMLDivElement>(null);
+  const dragMeta = useDragTracker(rotatorRef);
   const degPerItem = 360 / items.length;
 
   const startSpin = () => {
@@ -111,13 +99,18 @@ const Spinner = ({
     const revs = random(revRange[0], revRange[1]);
     const revDeg = 360 * revs * dir;
     const winIndex = random(0, items.length - 1);
-    const winDeg = (270 - (degPerItem / 2) - (degPerItem * winIndex)) * dir;
+    let winDeg = 0;
+    if (dir > 0) {
+      winDeg = (270 - (degPerItem / 2) - (degPerItem * winIndex));
+    } else {
+      winDeg = (-90 - (degPerItem / 2) - (degPerItem * winIndex));
+    }
 
     setState('spinning');
     setWinIndex(winIndex);
     setAnim({
       duration: revDuration,
-      rotation: anim.rotation + revDeg + winDeg,
+      rotation: revDeg + winDeg,
     });
   }
 
@@ -125,55 +118,59 @@ const Spinner = ({
     if (state !== 'spinning') return;
     const interval = setTimeout(() => {
       setState('completed');
+      console.log(items[winIndex!]);
       onSpinCompleted(items[winIndex!]);
     }, anim.duration * 1000);
     return () => clearInterval(interval);
   }, [state])
 
-  // Todo: add draggable wheel
+  useEffect(() => {
+    if (!dragMeta.isActive || dragMeta.history.length < 1 ||  state !== 'ready') {
+      return;
+    }
+
+    if (dragMeta.velocity && dragMeta.velocity > 0.1) {
+      startSpin();
+      return;
+    }
+
+    const dir = distance(dragMeta.history[0], dragMeta.history.at(-1)!)
+    setAnim({
+      duration: 0,
+      rotation: anim.rotation + ((dir.x + dir.y) * 0.1),
+    })
+  }, [dragMeta, state])
+
+  useEffect(() => {
+    onStateChange(state);
+  }, [state, onStateChange]);
 
   return (
     <Wrap>
-      {state === 'completed' && <ConfettiWrap>
-        <Confetti
-          numberOfPieces={100}
-          width={500}
-          height={500}
-        />
-      </ConfettiWrap>
-      }
-      <WheelWrap>
-        <PointerWrap>
-          <FontAwesomeIcon icon={["fas", "map-marker-alt"]} />
-        </PointerWrap>
-        <CtaButton
-          variant="tertiary"
-          onClick={() => startSpin()}
-          disabled={state !== 'ready'}
+      <PointerWrap>
+        <FontAwesomeIcon icon={["fas", "map-marker-alt"]} />
+      </PointerWrap>
+      <CtaButton
+        variant="tertiary"
+        onClick={() => startSpin()}
+        disabled={state !== 'ready'}
+      >
+        {state === 'ready' ? '🎲' : '🎉'}
+      </CtaButton>
+      <WheelAnimationWrap ref={rotatorRef}>
+        <WheelAnimation
+          duration={anim.duration}
+          rotation={anim.rotation}
+          allowFlashing={flashing}
         >
-          {state === 'ready' ? '🎲' : '🎉'}
-        </CtaButton>
-        <WheelAnimationWrap>
-          <WheelAnimation
-            duration={anim.duration}
-            rotation={anim.rotation}
-            allowFlashing={flashing}
-          >
-            <Wheel
-              items={items}
-              highlightIndex={state === 'completed' ? winIndex : undefined}
-            />
-          </WheelAnimation>
-        </WheelAnimationWrap>
-      </WheelWrap>
-      {state !== 'completed' &&
-        <Label>Let's spin the wheel!!</Label>
-      }
-      {state === 'completed' &&
-        <Label>You won! {items[winIndex!].text}</Label>
-      }
+          <Wheel
+            items={items}
+            highlightIndex={state === 'completed' ? winIndex : undefined}
+          />
+        </WheelAnimation>
+      </WheelAnimationWrap>
     </Wrap>
   )
 }
 
-export default Spinner;
+export default AnimatedWheel;
