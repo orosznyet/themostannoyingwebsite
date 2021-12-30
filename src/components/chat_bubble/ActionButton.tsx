@@ -6,6 +6,7 @@ import History from "@/components/chat_bubble/History";
 import { useAppSelector } from "@/redux/hooks";
 import { selectHasInteracted } from "@/redux/stores/runtime";
 import { cssVars } from "../master/Theme";
+import { selectEnableSound } from "@/redux/stores/preference";
 
 const zIndexBase = 20;
 
@@ -78,6 +79,7 @@ const initialMessage = () => ({
  * to the history now with a notification sound.
  */
 const ActionButton = () => {
+  const enableSound = useAppSelector(selectEnableSound);
   const [history, setHistory] = useState([initialMessage()] as HistoryItem[]);
   const [isOpen, setIsOpen] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);
@@ -88,6 +90,15 @@ const ActionButton = () => {
     setHistory([...history, { text: message, isUser, time: new Date() }]);
   };
 
+  const playSound = () => {
+    if (!enableSound) { return; }
+    try {
+      notificationSfx.play();
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   const addRandomBotMessage = () => {
     const pool = messages.filter(message => !history.some(item => item.text === message));
     if (pool.length == 0) {
@@ -97,11 +108,7 @@ const ActionButton = () => {
     addHistory(randomMessage, false);
     if (!isOpen) {
       setBadgeCounter(badgeCounter + 1);
-      try {
-        notificationSfx.play();
-      } catch (e) {
-        console.error(e);
-      }
+      playSound();
     }
   }
 
