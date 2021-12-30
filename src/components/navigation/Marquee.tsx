@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useAppSelector } from '@/redux/hooks';
-import { selectEnableFlashing } from '@/redux/stores/consent';
+import { selectEnableFlashing } from '@/redux/stores/preference';
 import ArticleService from '@/services/ArticleService';
 import MarqueePlugin from "react-fast-marquee";
 import styled, { keyframes } from "styled-components"

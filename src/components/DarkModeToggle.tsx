@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { selectDarkMode, setDarkMode } from "@/redux/stores/appearance";
+import { selectDarkMode, setDarkMode } from "@/redux/stores/preference";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { cssVars } from "./master/Theme";
 

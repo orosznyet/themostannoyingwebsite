@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/redux/hooks";
-import { selectDarkMode } from "@/redux/stores/appearance";
+import { selectDarkMode } from "@/redux/stores/preference";
 import { createGlobalStyle } from "styled-components"
 
 // Using styled-components provided theme is great and all but I'm losing

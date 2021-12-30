@@ -1,5 +1,5 @@
 import { useAppSelector } from '@/redux/hooks';
-import { selectEnableFlashing } from '@/redux/stores/consent';
+import { selectEnableFlashing } from '@/redux/stores/preference';
 import { random } from '@/utils/math';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';

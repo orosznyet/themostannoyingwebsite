@@ -3,20 +3,18 @@ import type { AppState } from '@/redux/store'
 
 export interface ConsentState {
   reviewCompleted: boolean
-  enableCookies: boolean
-  enableAnalytics: boolean
-  enableSound: boolean
-  enableFlashing: boolean
-  adultFilter: boolean
+  allowCookies: boolean
+  allowAnalytics: boolean
+  allowLocation: boolean | null
+  allowNotification: boolean | null
 }
 
 const initialState: ConsentState = {
   reviewCompleted: false,
-  enableCookies: true,
-  enableAnalytics: true,
-  enableSound: true,
-  enableFlashing: false,
-  adultFilter: true,
+  allowCookies: true,
+  allowAnalytics: true,
+  allowLocation: null,
+  allowNotification: null,
 }
 
 export const consent = createSlice({
@@ -26,44 +24,38 @@ export const consent = createSlice({
     setReviewCompleted: (state, action: PayloadAction<boolean>) => {
       state.reviewCompleted = action.payload
     },
-    setEnableCookies: (state, action: PayloadAction<boolean>) => {
-      state.enableCookies = action.payload
+    setAllowCookies: (state, action: PayloadAction<boolean>) => {
+      state.allowCookies = action.payload
     },
-    setEnableAnalytics: (state, action: PayloadAction<boolean>) => {
-      state.enableAnalytics = action.payload
+    setAllowAnalytics: (state, action: PayloadAction<boolean>) => {
+      state.allowAnalytics = action.payload
     },
-    setEnableSound: (state, action: PayloadAction<boolean>) => {
-      state.enableSound = action.payload
+    setAllowLocation: (state, action: PayloadAction<boolean>) => {
+      state.allowLocation = action.payload
     },
-    setEnableFlashing: (state, action: PayloadAction<boolean>) => {
-      state.enableFlashing = action.payload
+    setAllowNotification: (state, action: PayloadAction<boolean>) => {
+      state.allowNotification = action.payload
     },
-    setAdultFilter: (state, action: PayloadAction<boolean>) => {
-      state.adultFilter = action.payload
-    }
   },
 })
 
 export const {
   setReviewCompleted,
-  setEnableCookies,
-  setEnableAnalytics,
-  setEnableSound,
-  setEnableFlashing,
-  setAdultFilter
+  setAllowCookies,
+  setAllowAnalytics,
+  setAllowLocation,
+  setAllowNotification,
 } = consent.actions
 
 export const selectReviewCompleted =
   (state: AppState) => state.consent.reviewCompleted
-export const selectEnableCookies =
-  (state: AppState) => state.consent.enableCookies
-export const selectEnableAnalytics =
-  (state: AppState) => state.consent.enableAnalytics
-export const selectEnableSound =
-  (state: AppState) => state.consent.enableSound
-export const selectEnableFlashing =
-  (state: AppState) => state.consent.enableFlashing
-export const selectAdultFilter =
-  (state: AppState) => state.consent.adultFilter
+export const selectAllowCookies =
+  (state: AppState) => state.consent.allowCookies
+export const selectAllowAnalytics =
+  (state: AppState) => state.consent.allowAnalytics
+export const selectAllowLocation =
+  (state: AppState) => state.consent.allowLocation
+export const selectAllowNotification =
+  (state: AppState) => state.consent.allowNotification
 
 export default consent.reducer
