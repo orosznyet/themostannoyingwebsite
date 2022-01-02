@@ -3,6 +3,7 @@ import {
   faCommentDots,
   faMapMarkerAlt,
   faPaperPlane,
+  faPlayCircle,
   faTags,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
@@ -13,4 +14,5 @@ export default function() {
   library.add(faTags);
   library.add(faMapMarkerAlt);
   library.add(faPaperPlane);
+  library.add(faPlayCircle)
 }
