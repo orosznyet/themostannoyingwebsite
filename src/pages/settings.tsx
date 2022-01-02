@@ -39,9 +39,11 @@ const BlockBody = styled.div<{gap?: boolean}>`
   flex-direction: column;
   gap: ${(props) => props.gap ? cssVars.spacing.gap : 0};
 `;
-const LabelRow = styled.label`
-  display: flex;
-  justify-content: space-between;
+const RowWithLabel = styled.div`
+  label {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 type ToggableRowProps = {
@@ -52,15 +54,17 @@ type ToggableRowProps = {
 }
 const ToggableRow = ({label, name, checked, onChange} : ToggableRowProps) => {
   return (
-    <LabelRow>
-      <span>{label}</span>
-      <input
-        type="checkbox"
-        name={name}
-        checked={checked}
-        onChange={onChange}
-      />
-    </LabelRow>
+    <RowWithLabel>
+      <label>
+        <span>{label}</span>
+        <input
+          type="checkbox"
+          name={name}
+          checked={checked}
+          onChange={onChange}
+        />
+      </label>
+    </RowWithLabel>
   )
 }
 
@@ -175,6 +179,9 @@ export default function PrivacyPolicy() {
             </p>
             <p>
               Elapsed seconds: <span>{runtime.inFocusSeconds}</span>
+            </p>
+            <p>
+              Is in focus: <span>{runtime.isInFocus ? 'Yes': 'No'}</span>
             </p>
             <p>
               Had first interaction: <span>{runtime.hasInteracted? 'Yes': 'No'}</span>

@@ -22,9 +22,10 @@ interface MainLayoutProps {
 }
 
 export default function MainLayout({ children }: MainLayoutProps) {
-  const experience = useAppSelector(state => state.experience);
+  const { exitPrompt, wheelOfFortune, mockChat} = useAppSelector(state => state.experience);
+
   useBeforeUnload(
-    experience.exitPrompt,
+    exitPrompt,
     `I'd reconsider leaving before some bad things happend to you. Are you sure?`
   );
 
@@ -38,8 +39,8 @@ export default function MainLayout({ children }: MainLayoutProps) {
       {children}
       <Footer />
 
-      {experience.wheelOfFortune && <WheelOfFortune />}
-      {experience.mockChat && <ChatBubble />}
+      {wheelOfFortune && <WheelOfFortune />}
+      {mockChat && <ChatBubble />}
       <CookieBar />
     </Layout>
   );

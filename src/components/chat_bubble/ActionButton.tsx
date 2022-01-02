@@ -80,12 +80,13 @@ const initialMessage = () => ({
  */
 const ActionButton = () => {
   const enableSound = useAppSelector(selectEnableSound);
+  const hasInteracted = useAppSelector(selectHasInteracted);
   const [history, setHistory] = useState([initialMessage()] as HistoryItem[]);
   const [isOpen, setIsOpen] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);
   const notificationSfx = useAudio("/assets/sfx/notification_chord1.wav");
-  const hasInteracted = useAppSelector(selectHasInteracted);
 
+  const preventClose: MouseEventHandler = (e) => e.stopPropagation();
   const addHistory = (message: string, isUser: boolean) => {
     setHistory([...history, { text: message, isUser, time: new Date() }]);
   };
@@ -135,7 +136,7 @@ const ActionButton = () => {
   }, [])
 
   return (
-    <Wrap className={isOpen ? 'open' : 'closed'} onClick={(e) => e.stopPropagation()}>
+    <Wrap className={isOpen ? 'open' : 'closed'} onClick={preventClose}>
       <IconWrap onClick={toggleHistory}>
         <FontAwesomeIcon icon={["fas", "comment-dots"]} />
         {badgeCounter > 0 && <IconBadge>{badgeCounter}</IconBadge>}

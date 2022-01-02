@@ -1,4 +1,4 @@
-import { PersistedStoreType } from "@/redux/persistor";
+import { PersistedStoreType } from "@/redux/store";
 import { setHasInteracted } from "@/redux/stores/runtime";
 import { useEffect, useState } from "react";
 

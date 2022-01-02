@@ -3,15 +3,15 @@ import type { AppState } from '@/redux/store'
 
 export interface RuntimeState {
   startTime: Date
+  isInFocus: boolean
   inFocusSeconds: number
-  modalCounter: number
   hasInteracted: boolean
 }
 
 const initialState: RuntimeState = {
   startTime: new Date(),
+  isInFocus: false,
   inFocusSeconds: 0,
-  modalCounter: 0,
   hasInteracted: false,
 }
 
@@ -23,14 +23,8 @@ export const runtime = createSlice({
   name: 'runtime',
   initialState,
   reducers: {
-    setModalCounter: (state, action: PayloadAction<number>) => {
-      state.modalCounter = action.payload
-    },
-    incrementModalCounter: (state) => {
-      state.modalCounter = state.modalCounter + 1
-    },
-    decreaseModalCounter: (state) => {
-      state.modalCounter = state.modalCounter - 1
+    setIsInFocus: (state, action: PayloadAction<boolean>) => {
+      state.isInFocus = action.payload;
     },
     setHasInteracted: (state) => {
       state.hasInteracted = true
@@ -42,17 +36,15 @@ export const runtime = createSlice({
 })
 
 export const {
-  setModalCounter,
-  incrementModalCounter,
-  decreaseModalCounter,
+  setIsInFocus,
   setHasInteracted,
   setInFocusSeconds,
 } = runtime.actions
 
 export const selectStartTime =
   (state: AppState) => state.runtime.startTime
-export const selectModalCounter =
-  (state: AppState) => state.runtime.modalCounter
+export const selectIsInFocus =
+  (state: AppState) => state.runtime.isInFocus
 export const selectHasInteracted =
   (state: AppState) => state.runtime.hasInteracted
 export const selectInFocusSeconds =

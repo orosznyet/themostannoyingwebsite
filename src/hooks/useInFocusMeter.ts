@@ -1,5 +1,5 @@
-import { PersistedStoreType } from "@/redux/persistor";
-import { setInFocusSeconds } from "@/redux/stores/runtime";
+import { PersistedStoreType } from "@/redux/store";
+import { setInFocusSeconds, setIsInFocus } from "@/redux/stores/runtime";
 import { useEffect, useState } from "react";
 
 /**
@@ -7,11 +7,11 @@ import { useEffect, useState } from "react";
  * the redux store.
  */
 const useInFocusMeter = (store: PersistedStoreType) => {
-  const [isInFocus, setIsInFocus] = useState(false);
+  const [isInFocus, setIsInFocusInternal] = useState(true);
   const [elapsed, setElapsed] = useState(0);
 
-  const handleFocus = () => setIsInFocus(true);
-  const handleBlur = () => setIsInFocus(false);
+  const handleFocus = () => setIsInFocusInternal(true);
+  const handleBlur = () => setIsInFocusInternal(false);
 
   useEffect(() => {
     document.addEventListener('focus', handleFocus);
@@ -23,9 +23,16 @@ const useInFocusMeter = (store: PersistedStoreType) => {
   }, []);
 
   useEffect(() => {
+    store.dispatch(setIsInFocus(isInFocus))
+  }, [isInFocus]);
+
+  useEffect(() => {
     if (!isInFocus) { return; }
 
     const interval = setInterval(() => {
+      // TODO: Broadcasting this will force the whole screen to rerender
+      // which is unacceptable. Try solve this or even move runtime stuff
+      // into a separate store, hook.
       store.dispatch(setInFocusSeconds(elapsed + 1))
       setElapsed(elapsed + 1);
     }, 1000);
