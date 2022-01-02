@@ -1,14 +1,17 @@
-import LockedContent from "@/components/tricks/LockedContent";
-import ArticleService from "@/services/ArticleService";
 import { GetServerSideProps, NextPage } from "next";
 import Error from 'next/error';
 import Head from "next/head";
+import { useAppSelector } from "@/redux/hooks";
+import { selectContentPaywall } from "@/redux/stores/experience";
+import LockedContent from "@/components/tricks/LockedContent";
+import ArticleService from "@/services/ArticleService";
 
 interface Props {
   slug: string;
 }
 
 const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
+  const showLocker = useAppSelector(selectContentPaywall);
   const article = ArticleService.getBySlug(slug);
 
   if (!article) {
@@ -21,7 +24,7 @@ const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
         <title>{article.title}</title>
       </Head>
       <h1>{article.title}</h1>
-      <LockedContent initialMaxHeight={200}>
+      <LockedContent initialMaxHeight={200} active={showLocker}>
         {article.body}
       </LockedContent>
     </main>

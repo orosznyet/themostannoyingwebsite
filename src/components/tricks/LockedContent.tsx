@@ -3,22 +3,18 @@ import styled from "styled-components";
 import { cssVars } from "../master/Theme";
 import EscapingElement from "./EscapingElement";
 
-type Props = {
-  children: React.ReactNode;
-  initialMaxHeight: number;
-  steps?: number;
-}
-
-const Wrap = styled.div<{maxHeight: number}>`
+const Wrap = styled.div<{ maxHeight: number | string }>`
   position: relative;
-  max-height: ${({maxHeight}) => maxHeight || 0}px;
+  max-height: ${({ maxHeight }) =>
+    typeof maxHeight === 'string' ? maxHeight : `${maxHeight || 0}px`
+  };
   transition: max-height 0.3s ease-in-out;
   overflow: hidden;
 `
-const Overlay = styled.div<{isHidden: boolean}>`
+const Overlay = styled.div<{ isHidden: boolean }>`
   position: absolute;
-  bottom: ${({isHidden}) => isHidden ? -500 : 0}px;
-  opacity: ${({isHidden}) => isHidden ? 0 : 1};
+  bottom: ${({ isHidden }) => isHidden ? -500 : 0}px;
+  opacity: ${({ isHidden }) => isHidden ? 0 : 1};
   left: 0;
   width: 100%;
   background: ${cssVars.color.surface};
@@ -39,7 +35,19 @@ const SmallPrint = styled.small`
   font-style: italic;
 `;
 
-const LockedContent = ({ children, initialMaxHeight, steps = 200 }: Props) => {
+type Props = {
+  children: React.ReactNode;
+  active?: boolean;
+  initialMaxHeight: number;
+  steps?: number;
+}
+
+const LockedContent = ({
+  children,
+  initialMaxHeight,
+  steps = 200,
+  active = true,
+}: Props) => {
   const [maxHeight, setMaxHeight] = useState(initialMaxHeight);
   const [isRevealed, setIsRevealed] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -54,13 +62,13 @@ const LockedContent = ({ children, initialMaxHeight, steps = 200 }: Props) => {
   }
 
   return (
-    <Wrap maxHeight={maxHeight}>
+    <Wrap maxHeight={active ? maxHeight : 'auto'}>
       <div ref={contentRef}>
         {children}
       </div>
-      <Overlay isHidden={isRevealed}>
+      <Overlay isHidden={!active || isRevealed}>
         <h1>You gott pay a $0.69/hour with 24 months of commitment in order to see the next paragraph.</h1>
-        <EscapingElement boundingBox={{left: 0, bottom: 0}}>
+        <EscapingElement boundingBox={{ left: 0, bottom: 0 }}>
           <PaymentButton>
             Pay! 100% legit and secure*
           </PaymentButton>
