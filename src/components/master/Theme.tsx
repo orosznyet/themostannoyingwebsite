@@ -124,6 +124,7 @@ export const cssVars = {
   spacing: {
     gap: 'var(--gap)',
     gap2x: 'calc(var(--gap) * 2)',
+    container: '1200px'
   },
 }
 

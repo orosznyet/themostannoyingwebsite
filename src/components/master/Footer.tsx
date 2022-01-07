@@ -3,7 +3,7 @@ import { cssVars } from './Theme';
 
 const FooterView = styled.footer`
   margin-top: calc(${cssVars.spacing.gap2x} * 3);
-  padding-top: ${cssVars.spacing.gap2x};
+  padding: ${cssVars.spacing.gap2x} 0px;
   border-top: 1px solid ${cssVars.color.tertiary};
   font-size: ${cssVars.fontSize.small};
 `;
