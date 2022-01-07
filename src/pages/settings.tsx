@@ -114,7 +114,7 @@ export default function PrivacyPolicy() {
           <BlockTitle>Consent</BlockTitle>
           <BlockBody gap>
             <ToggableRow
-              label="Allow cookies"
+              label="Allow non-essential cookies"
               name="allow_cookies"
               checked={consent.allowCookies}
               onChange={() => dispatch(setAllowCookies(!consent.allowCookies))}
