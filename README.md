@@ -65,3 +65,4 @@ If you are eager to support me, throw a few coins at me on [BuyMeACoffee/onetdev
 - Notification sound: https://github.com/akx/Notifications under licence CC0
 - Icons: https://fontawesome.com 
 - Lava photo: https://unsplash.com/photos/80x3QULJDN4
+- Background ad photo: https://unsplash.com/photos/ZRns2R5azu0
