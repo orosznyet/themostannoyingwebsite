@@ -35,3 +35,13 @@ a:hover {
   color: var(--color-secondary-alt);
   text-decoration: underline;
 }
+
+::-moz-selection { /* Code for Firefox */
+  color: var(--color-secondary);
+  background: var(--color-primary);
+}
+
+::selection {
+  color: var(--color-secondary);
+  background: var(--color-primary);
+}
