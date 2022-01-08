@@ -21,6 +21,8 @@ At the moment we are (plan to) supporting the following features:
 - [ ] Funny, silly contents (like Onion news)
 - [ ] Design
 
+In order to avoid adblockers this repo uses "gift" instead of anything that would resemble ad-like content (eg.: promotion, advertisement).
+
 If you have anything to add, do not hesitate and **start your PR today, it's 100% off, ACT NOW!**
 
 ## Getting Started

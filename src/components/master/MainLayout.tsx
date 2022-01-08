@@ -9,7 +9,7 @@ import { WheelOfFortune } from '@/components/wheel_of_fortune';
 import { cssVars } from './Theme';
 import { useBeforeUnload } from 'react-use';
 import { useAppSelector } from '@/redux/hooks';
-import SuperDuperFlaps from '../gifts/SuperDuperFlap';
+import GiftFlaps from '../gifts/ContainerFlap';
 
 const Layout = styled.div`
   position: relative;
@@ -17,7 +17,7 @@ const Layout = styled.div`
   max-width: ${cssVars.spacing.container};
   padding: 0 ${cssVars.spacing.gap};
   margin: 0 auto;
-  background: ${cssVars.color.surface}
+  background: ${cssVars.color.surface};
 `;
 
 interface MainLayoutProps {
@@ -34,7 +34,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
   return (
     <>
-      <SuperDuperFlaps />
+      <GiftFlaps />
       <Layout>
         <Head>
           <title>The Most Annoying Website</title>

@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
-import Image from 'next/Image';
+import Image from 'next/image';
 import { cssVars } from '../master/Theme';
 import Link from 'next/link';
 
-const GiftWrap = styled.div`
+const ContainerWrap = styled.div`
   max-width: calc(${cssVars.spacing.container} + 250px);
   position: sticky;
   top: 0;
@@ -39,9 +39,9 @@ const RightText = styled.div`
   transform-origin: right bottom;
 `;
 
-const SuperDuperFlaps = () => {
+const GiftFlaps = () => {
   return (
-    <GiftWrap>
+    <ContainerWrap>
       <Gift>
         <Link href="/super-duper" passHref>
           <a>
@@ -57,8 +57,8 @@ const SuperDuperFlaps = () => {
           </a>
         </Link>
       </Gift>
-    </GiftWrap>
+    </ContainerWrap>
   );
 }
 
-export default SuperDuperFlaps;
+export default GiftFlaps;
