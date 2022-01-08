@@ -9,7 +9,7 @@ import { WheelOfFortune } from '@/components/wheel_of_fortune';
 import { cssVars } from './Theme';
 import { useBeforeUnload } from 'react-use';
 import { useAppSelector } from '@/redux/hooks';
-import GiftFlaps from '../gifts/ContainerFlap';
+import ContainerGiftFlaps from '../gifts/ContainerGiftFlaps';
 
 const Layout = styled.div`
   position: relative;
@@ -34,7 +34,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
   return (
     <>
-      <GiftFlaps />
+      <ContainerGiftFlaps />
       <Layout>
         <Head>
           <title>The Most Annoying Website</title>

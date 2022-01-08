@@ -118,7 +118,7 @@ const History = ({onUserMessage, history, onClose}: Props) => {
   }
 
   useEffect(() => {
-    setShowTyping(history?.at(-1)?.isUser ?? false);
+    setShowTyping(history[history.length -1]?.isUser ?? false);
   }, [history])
 
   // We don't care about the current scroll position, this will force the user

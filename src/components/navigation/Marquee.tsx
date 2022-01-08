@@ -41,10 +41,18 @@ const LinkText = styled.a<{ highlight: boolean, flashing: boolean }>`
 const Marquee = ({ className }: Props) => {
   const flashing = useAppSelector(selectEnableFlashing);
   const [items] = useState(ArticleService.getAllFiltered({isHighlighted: true}));
+  const [speed, setSpeed] = useState(100)
+
+  const onEnter = () => { setSpeed(2000); }
+  const onLeave = () => { setSpeed(100); }
 
   return (
-    <Wrap className={className}>
-      <MarqueePlugin gradient={false} speed={100}>
+    <Wrap
+      className={className}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+      >
+      <MarqueePlugin gradient={false} speed={speed}>
         {items.map(({ slug, title }, index) => {
           const path = '/articles/' + slug;
           return <Link href={path} key={index} passHref>

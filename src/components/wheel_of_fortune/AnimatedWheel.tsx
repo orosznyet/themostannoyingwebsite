@@ -140,7 +140,10 @@ const AnimatedWheel = ({
       return;
     }
 
-    const dir = distance(dragMeta.history[0], dragMeta.history.at(-1)!)
+    const dir = distance(
+      dragMeta.history[0],
+      dragMeta.history[dragMeta.history.length -1],
+    )
     setAnim({
       duration: 0,
       rotation: anim.rotation + ((dir.x + dir.y) * 0.1),

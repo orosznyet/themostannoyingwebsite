@@ -1,18 +1,20 @@
 import React from "react";
 
-interface ArticleStaticFields {
+export interface ArticleCore {
   slug: string;
   title: string;
+  intro: string;
   isHighlighted?: boolean;
+  isOnCover?: boolean;
   coverImage?: string;
 }
 
-export interface Article extends ArticleStaticFields {
+export interface Article extends ArticleCore {
   date: Date;
   body: React.ReactNode;
 }
 
-export interface ArticleStatic extends ArticleStaticFields {
+export interface ArticleStatic extends ArticleCore {
   date: string;
   body: string;
 }

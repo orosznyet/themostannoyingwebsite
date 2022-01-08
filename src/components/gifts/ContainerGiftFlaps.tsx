@@ -39,7 +39,7 @@ const RightText = styled.div`
   transform-origin: right bottom;
 `;
 
-const GiftFlaps = () => {
+const ContainerGiftFlaps = () => {
   return (
     <ContainerWrap>
       <Gift>
@@ -61,4 +61,4 @@ const GiftFlaps = () => {
   );
 }
 
-export default GiftFlaps;
+export default ContainerGiftFlaps;
