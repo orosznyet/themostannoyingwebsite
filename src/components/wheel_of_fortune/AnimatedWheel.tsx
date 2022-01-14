@@ -4,7 +4,7 @@ import useDragTracker from '@/hooks/useDragTracker';
 import { distance, random } from '@/utils/math';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../form/Button';
-import { cssRule, cssVars } from '../master/Theme';
+import { cssRule, cssVars } from '@/styles/theme';
 import Wheel, { Item } from './Wheel';
 
 type Props = {

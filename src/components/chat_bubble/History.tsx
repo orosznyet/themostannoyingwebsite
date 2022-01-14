@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormEventHandler, useEffect, useRef, useState } from "react";
 import ReactTimeAgo from "react-timeago";
 import styled, { css, keyframes } from "styled-components";
-import { cssVars } from "../master/Theme";
+import { cssVars } from "@/styles/theme";
 
 export type HistoryItem = {
   text: string;

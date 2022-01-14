@@ -1,6 +1,4 @@
-import { useAppSelector } from "@/redux/hooks";
-import { selectDarkMode } from "@/redux/stores/preference";
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from "styled-components";
 
 // Using styled-components provided theme is great and all but I'm losing
 // in-browser variable modifications. It's easy to get the current OS
@@ -47,7 +45,7 @@ export const cssRule = {
   xxlDown: `${cssRulePrefix}`,
 }
 
-const DarkTheme = createGlobalStyle`
+export const DarkThemeStyle = createGlobalStyle`
   :root {
     --color-background: #050416;
     --color-primary: #00bcd4;
@@ -68,7 +66,7 @@ const DarkTheme = createGlobalStyle`
   }
 `;
 
-const LightTheme = createGlobalStyle`
+export const LightThemeStyle = createGlobalStyle`
   :root {
     --color-background: #fafafa;
     --color-primary: #00b0c0;
@@ -127,19 +125,3 @@ export const cssVars = {
     container: '1200px'
   },
 }
-
-type Props = {
-  children: React.ReactNode
-}
-
-const Theme = ({ children }: Props) => {
-  const isDarkMode = useAppSelector(selectDarkMode);
-
-  return <>
-    {isDarkMode && <DarkTheme />}
-    {!isDarkMode &&<LightTheme />}
-    {children}
-  </>
-}
-
-export default Theme

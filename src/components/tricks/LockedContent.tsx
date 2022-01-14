@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import { cssVars } from "../master/Theme";
+import { cssVars } from "@/styles/theme";
 import EscapingElement from "./EscapingElement";
 
 const Wrap = styled.div<{ maxHeight: number | string }>`

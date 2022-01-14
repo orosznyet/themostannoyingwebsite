@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { cssVars } from "../master/Theme";
+import { cssVars } from "@/styles/theme";
 import GenericModal from "../modal/GenericModal";
 import ModalContent from "./ModalContent";
 

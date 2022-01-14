@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
-import { cssVars } from "../master/Theme";
+import { cssVars } from "@/styles/theme";
 import GenericModal, { Props as GenericProps} from './GenericModal';
 
 type Props = GenericProps & {

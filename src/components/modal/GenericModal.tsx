@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-import { cssVars } from "../master/Theme";
+import { cssVars } from "@/styles/theme";
 
 export type Props = {
   children: React.ReactChild,

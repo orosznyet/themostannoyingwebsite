@@ -5,7 +5,7 @@ import { selectEnableFlashing } from '@/redux/stores/preference';
 import ArticleService from '@/services/ArticleService';
 import MarqueePlugin from "react-fast-marquee";
 import styled, { keyframes } from "styled-components"
-import { cssVars } from '../master/Theme';
+import { cssVars } from '@/styles/theme';
 
 type Props = {
   className?: string;

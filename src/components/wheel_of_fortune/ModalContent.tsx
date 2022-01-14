@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import Confetti from 'react-confetti'
 import styled from 'styled-components';
-import { cssVars } from '../master/Theme';
+import { cssVars } from '@/styles/theme';
 import AnimatedWheel, { AnimatedWheelState } from './AnimatedWheel';
 import { Item } from './Wheel';
 

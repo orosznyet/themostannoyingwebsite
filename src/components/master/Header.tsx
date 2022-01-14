@@ -4,7 +4,7 @@ import DarkModeToggle from '../DarkModeToggle';
 import Marquee from '../navigation/Marquee';
 import MainNavigation from '../navigation/MainNavigation';
 import UserNavigation from '../navigation/UserNavigation';
-import { cssVars } from './Theme';
+import { cssVars } from '@/styles/theme';
 
 const StyledHeader = styled.header`
   display: grid;

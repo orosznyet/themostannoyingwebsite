@@ -1,4 +1,4 @@
-import { cssRule, cssVars } from "@/components/master/Theme";
+import { cssRule, cssVars } from "@/styles/theme";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   setDarkMode,

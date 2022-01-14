@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { cssVars } from "../master/Theme";
+import { cssVars } from "@/styles/theme";
 
 type Props = {
   variant: "primary" | "secondary" | "tertiary";

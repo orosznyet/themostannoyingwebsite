@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { cssVars } from './Theme';
+import { cssVars } from '@/styles/theme';
 
 const FooterView = styled.footer`
   margin-top: calc(${cssVars.spacing.gap2x} * 3);

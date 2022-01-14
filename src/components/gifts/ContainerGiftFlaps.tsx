@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import Image from 'next/image';
-import { cssVars } from '../master/Theme';
+import { cssVars } from '@/styles/theme';
 import Link from 'next/link';
 
 const ContainerWrap = styled.div`

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import History from "@/components/chat_bubble/History";
 import { useAppSelector } from "@/redux/hooks";
 import { selectHasInteracted } from "@/redux/stores/runtime";
-import { cssVars } from "../master/Theme";
+import { cssVars } from "@/styles/theme";
 import { selectEnableSound } from "@/redux/stores/preference";
 
 const zIndexBase = 20;
