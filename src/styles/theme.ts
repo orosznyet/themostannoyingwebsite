@@ -45,47 +45,77 @@ export const cssRule = {
   xxlDown: `${cssRulePrefix}`,
 }
 
-export const DarkThemeStyle = createGlobalStyle`
-  :root {
-    --color-background: #050416;
-    --color-primary: #00bcd4;
-    --color-primary-alt: #00acc1;
-    --color-secondary: #ffc107;
-    --color-secondary-alt: #ffb300;
-    --color-tertiary: #ff5722;
-    --color-tertiary-alt: #ff5722;
-    --color-surface: #141221;;
-    --color-error: #f44336;
-    --color-on-primary: #ffffff;
-    --color-on-secondary: #000000;
-    --color-on-tertiary: #000000;
-    --color-on-background: #fff;
-    --color-on-surface: #fff;
-    --color-on-error: #fff;
-    --color-dimmer: #464646b5;
-  }
-`;
 
-export const LightThemeStyle = createGlobalStyle`
-  :root {
-    --color-background: #fafafa;
-    --color-primary: #00b0c0;
-    --color-primary-alt: #028aa5;
-    --color-secondary: #991199;
-    --color-secondary-alt: #660159;
-    --color-tertiary: #ee4917;
-    --color-tertiary-alt: #d33d0f;
-    --color-surface: #f3f5ec;
-    --color-error: #f44034;
-    --color-on-primary: #fff;
-    --color-on-secondary: #050416;
-    --color-on-tertiary: #050416;
-    --color-on-background: #050416;
-    --color-on-surface: #050416;
-    --color-on-error: #050416;
-    --color-dimmer: #3a3a3abc;
+export const DarkTheme = {
+  colors: {
+    background: "#050416",
+    primary: "#00bcd4",
+    primaryAlt: "#00acc1",
+    secondary: "#ffc107",
+    secondaryAlt: "#ffb300",
+    tertiary: "#ff5722",
+    tertiaryAlt: "#ff5722",
+    surface: "#141221",
+    error: "#f44336",
+    onPrimary: "#ffffff",
+    onSecondary: "#000000",
+    onTertiary: "#000000",
+    onBackground: "#fff",
+    onSurface: "#fff",
+    onError: "#fff",
+    dimmer: "#464646b5",
   }
-`;
+}
+
+export const LightTheme = {
+  colors: {
+    background: "#fafafa",
+    primary: "#00b0c0",
+    primaryAlt: "#028aa5",
+    secondary: "#991199",
+    secondaryAlt: "#660159",
+    tertiary: "#ee4917",
+    tertiaryAlt: "#d33d0f",
+    surface: "#f3f5ec",
+    error: "#f44034",
+    onPrimary: "#fff",
+    onSecondary: "#050416",
+    onTertiary: "#050416",
+    onBackground: "#050416",
+    onSurface: "#050416",
+    onError: "#050416",
+    dimmer: "#3a3a3abc",
+  }
+}
+
+export interface ThemeProps {
+  colors: Record<string, string>
+}
+const createThemeGlobalStyle = ({ colors }: ThemeProps) => {
+  return createGlobalStyle`
+    :root {
+      --color-background: ${colors.background};
+      --color-primary: ${colors.primary};
+      --color-primary-alt: ${colors.primaryAlt};
+      --color-secondary: ${colors.secondary};
+      --color-secondary-alt: ${colors.secondaryAlt};
+      --color-tertiary: ${colors.tertiary};
+      --color-tertiary-alt: ${colors.tertiaryAlt};
+      --color-surface: ${colors.surface};
+      --color-error: ${colors.error};
+      --color-on-primary: ${colors.onPrimary};
+      --color-on-secondary: ${colors.onsecondary};
+      --color-on-tertiary: ${colors.onTertiary};
+      --color-on-background: ${colors.onBackground};
+      --color-on-surface: ${colors.onSurface};
+      --color-on-error: ${colors.onError};
+      --color-dimmer: ${colors.dimmer};
+    }
+  `;
+}
+
+export const DarkThemeStyle = createThemeGlobalStyle(DarkTheme);
+export const LightThemeStyle = createThemeGlobalStyle(LightTheme);
 
 // We get the benefits of the styled-components but also have runtime
 // css variable capabilities.

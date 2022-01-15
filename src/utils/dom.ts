@@ -17,3 +17,7 @@ export const isPointWithin = (element: HTMLElement, point: Point) => {
     point.y <= rect.bottom
   )
 }
+
+export const inlineBase64File = (contents: string, mime: string) => {
+  return `data:${mime};base64,${Buffer.from(contents).toString('base64')}`
+}

@@ -1,5 +1,7 @@
+import { useState } from "react";
+import { ThemeProvider } from "styled-components";
 import { selectDarkMode } from "@/redux/stores/preference";
-import { DarkThemeStyle, LightThemeStyle } from "@/styles/theme";
+import { DarkTheme, DarkThemeStyle, LightTheme, LightThemeStyle } from "@/styles/theme";
 import { useBeforeUnload } from "react-use";
 import MatomoProvider from '@/components/analitics/MatomoProvider';
 import { Provider as ReduxProvider } from 'react-redux';
@@ -8,7 +10,6 @@ import redux from '@/redux/store';
 import registerIcons from '@/utils/icons';
 import useFirstInteraction from '@/hooks/useFirstInteraction';
 import useInFocusMeter from '@/hooks/useInFocusMeter';
-import { useState } from "react";
 import { selectExitPrompt } from "@/redux/stores/experience";
 
 type Props = {
@@ -48,7 +49,9 @@ const Provider = ({ children }: Props) => {
         <MatomoProvider>
           {isDarkMode && <DarkThemeStyle />}
           {!isDarkMode && <LightThemeStyle />}
-          {children}
+          <ThemeProvider theme={isDarkMode ? DarkTheme : LightTheme}>
+            {children}
+          </ThemeProvider>
         </MatomoProvider>
       </PersistGate>
     </ReduxProvider>
