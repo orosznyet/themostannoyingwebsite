@@ -11,7 +11,7 @@ const Grid = styled.main`
   gap: ${cssVars.spacing.gap};
   grid-template-areas: "cover" "dense-list" "list";
   ${cssRule.mdUp} {
-    grid-template-areas: "cover cover dense-list" "list  list  list";
+    grid-template-areas: "cover dense-list" "list  list";
     grid-template-columns: 4fr 1fr;
   }
 `;
@@ -21,7 +21,7 @@ const CoverArticle = styled.div`
 const DenseList = styled.ul`
   ${ClearListStyle}
   grid-area: dense-list;
-  gap: ${cssVars.spacing.gap};
+  gap: ${cssVars.spacing.gap2x};
 `;
 const RegularList = styled.ul`
   ${ClearListStyle}
@@ -30,6 +30,7 @@ const RegularList = styled.ul`
   gap: ${cssVars.spacing.gap};
   flex-direction: column;
   ${cssRule.mdUp} {
+    padding-top: ${cssVars.spacing.gap2x};
     flex-direction: row;
     flex-wrap: wrap;
   }

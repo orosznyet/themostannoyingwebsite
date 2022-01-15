@@ -2,6 +2,16 @@ import { ArticleCore } from "@/types"
 import Link from "next/link";
 import Image from "next/image";
 import CoverPlaceholder from "./CoverPlaceholder";
+import styled from "styled-components";
+import { cssVars } from "@/styles/theme";
+
+const Title = styled.h3`
+  margin: ${cssVars.spacing.gap} 0;
+`;
+const Intro = styled.p`
+  margin: 0;
+  margin-bottom: ${cssVars.spacing.gap};
+`;
 
 type Props = {
   article: ArticleCore
@@ -20,8 +30,8 @@ const SmallCoverListItem = ({ article }: Props) => {
             height="1200"
           />
         }
-        <h3>{article.title}</h3>
-        <p>{article.intro}</p>
+        <Title>{article.title}</Title>
+        <Intro>{article.intro}</Intro>
       </a>
     </Link>
   </>
