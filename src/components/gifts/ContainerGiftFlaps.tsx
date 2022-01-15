@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import Image from 'next/image';
 import { cssVars } from '@/styles/theme';
 import Link from 'next/link';
+import flapImage from '@/public/assets/images/car-advert.jpg'
 
 const ContainerWrap = styled.div`
   max-width: calc(${cssVars.spacing.container} + 250px);
@@ -46,8 +47,9 @@ const ContainerGiftFlaps = () => {
         <Link href="/super-duper" passHref>
           <a>
             <Image
-              src="/assets/images/car-advert.jpg"
+              src={flapImage}
               layout="responsive"
+              placeholder="blur"
               alt="Super duper car advert"
               width={1920}
               height={1200}

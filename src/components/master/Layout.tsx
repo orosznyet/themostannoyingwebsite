@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import Footer from './Footer';
-import CookieBar from '@/components/CookieBar';
+import CookieBar from '@/components/master/CookieConsent';
 import { ChatBubble } from '@/components/chat_bubble';
 import { WheelOfFortune } from '@/components/wheel_of_fortune';
 import { cssVars } from '@/styles/theme';

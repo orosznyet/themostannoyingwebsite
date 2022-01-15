@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import DarkModeToggle from '../DarkModeToggle';
+import DarkModeToggle from './DarkModeToggle';
 import Marquee from '../navigation/Marquee';
 import MainNavigation from '../navigation/MainNavigation';
 import UserNavigation from '../navigation/UserNavigation';
