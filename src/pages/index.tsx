@@ -23,6 +23,19 @@ const DenseList = styled.ul`
   grid-area: dense-list;
   gap: ${cssVars.spacing.gap2x};
 `;
+const DenseListItem = styled.li`
+  position: relative;
+  padding-bottom: ${cssVars.spacing.gap2x};
+  &::after {
+    content: "";
+    position: absolute;
+    border-bottom: 1px solid ${cssVars.color.secondary};
+    left: ${cssVars.spacing.gap};
+    right: ${cssVars.spacing.gap};
+    bottom: ${cssVars.spacing.gap};
+    opacity: 0.2;
+  }
+`;
 const RegularList = styled.ul`
   ${ClearListStyle}
   grid-area: list;
@@ -56,9 +69,9 @@ export default function Index() {
       <DenseList>
         {
           denseList.map((article, index) => (
-            <li key={index}>
+            <DenseListItem key={index}>
               <TextListItem article={article} />
-            </li>
+            </DenseListItem>
           ))
         }
       </DenseList>
