@@ -1,16 +1,11 @@
 import { Article } from "@/types";
 
 export default {
-  title: 'Monkey attack on the internet',
-  intro: 'British monkeys are spiking their activity on the internet. Let\'s see all what we know.',
+  title: 'Dummy article',
+  intro: 'Dolores, ex! Possimus assumenda ad labore voluptates quasi adipisci error',
   date: new Date('2021-12-24 18:31:00'),
-  coverImage: '/assets/images/articles/monkey-attack/cover.jpg',
-  isHighlighted: true,
   body: (
     <>
-      <p>
-        British monkeys are spiking their activity on the internet. Let's see all what we know.
-      </p>
       <p>
         Dolores, ex! Possimus assumenda ad labore voluptates quasi adipisci error, quisquam quam, enim cupiditate iure
         aut corrupti necessitatibus nulla architecto alias facere molestias..

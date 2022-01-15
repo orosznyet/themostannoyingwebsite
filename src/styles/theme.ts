@@ -104,7 +104,7 @@ const createThemeGlobalStyle = ({ colors }: ThemeProps) => {
       --color-surface: ${colors.surface};
       --color-error: ${colors.error};
       --color-on-primary: ${colors.onPrimary};
-      --color-on-secondary: ${colors.onsecondary};
+      --color-on-secondary: ${colors.onSecondary};
       --color-on-tertiary: ${colors.onTertiary};
       --color-on-background: ${colors.onBackground};
       --color-on-surface: ${colors.onSurface};

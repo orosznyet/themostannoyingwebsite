@@ -1,24 +1,75 @@
+import { cssRule, cssVars } from "@/styles/theme";
+import styled from "styled-components";
+import { ClearListStyle } from "@/utils/styles";
+import TextListItem from "@/components/articles/TextListItem";
+import SmallCoverListItem from "@/components/articles/SmallCoverListItem";
+import LargeCoverItem from "@/components/articles/LargeCoverItem";
+import ArticleService from "@/services/ArticleService";
+
+const Grid = styled.main`
+  display: grid;
+  gap: ${cssVars.spacing.gap};
+  grid-template-areas: "cover" "dense-list" "list";
+  ${cssRule.mdUp} {
+    grid-template-areas: "cover cover dense-list" "list  list  list";
+    grid-template-columns: 4fr 1fr;
+  }
+`;
+const CoverArticle = styled.div`
+  grid-area: cover;
+`;
+const DenseList = styled.ul`
+  ${ClearListStyle}
+  grid-area: dense-list;
+  gap: ${cssVars.spacing.gap};
+`;
+const RegularList = styled.ul`
+  ${ClearListStyle}
+  grid-area: list;
+  display: inline-flex;
+  gap: ${cssVars.spacing.gap};
+  flex-direction: column;
+  ${cssRule.mdUp} {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+`;
+const RegularListItem = styled.li`
+  flex-basis: 100%;
+  ${cssRule.mdUp} {
+    flex-basis: calc((100% - (${cssVars.spacing.gap} * 3)) / 4);
+  }
+`;
+
 export default function Index() {
+  const coverArticle = ArticleService.getAllFiltered({isHighlighted: true})[0];
+  const articlePool = ArticleService.getAllFiltered({isHighlighted: false}).slice(0,12);
+  const denseList = articlePool.slice(0,3);
+  const regularList = articlePool.slice(3);
+
   return (
-    <main>
-      <h1>Lorem ipsum dolor sit, amet consectetur adipisicing elit. In, esse?</h1>
-      <p>
-        Quasi, quibusdam illum. Iste mollitia quisquam veritatis temporibus deserunt velit repellat. Asperiores
-        cupiditate culpa deleniti natus id eum non, assumenda dolore nulla distinctio, doloribus dolores molestias
-        officia tenetur odit consequuntur, quos recusandae. Dolores, ex! Possimus assumenda ad labore voluptates quasi
-        adipisci error, quisquam quam, enim cupiditate iure aut corrupti necessitatibus nulla architecto alias facere
-        molestias.
-      </p>
-      <p>
-        Dolores, ex! Possimus assumenda ad labore voluptates quasi adipisci error, quisquam quam, enim cupiditate iure
-        aut corrupti necessitatibus nulla architecto alias facere molestias..
-      </p>
-      <p>
-        Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error omnis aliquid veritatis culpa provident
-        ratione minima! Quibusdam laboriosam ex eveniet accusantium explicabo, quasi, sequi corporis ducimus,
-        dignissimos recusandae officiis in facilis. Voluptatibus facere eum, corrupti hic quaerat a expedita fugit
-        repellendus! Inventore, perspiciatis. Repellendus, ex minima!
-      </p>
-    </main>
+    <Grid>
+      <CoverArticle>
+        <LargeCoverItem article={coverArticle} />
+      </CoverArticle>
+      <DenseList>
+        {
+          denseList.map((article, index) => (
+            <li key={index}>
+              <TextListItem article={article} />
+            </li>
+          ))
+        }
+      </DenseList>
+      <RegularList>
+        {
+          regularList.map((article, index) => (
+            <RegularListItem key={index}>
+              <SmallCoverListItem article={article} />
+            </RegularListItem>
+          ))
+        }
+      </RegularList>
+    </Grid>
   );
 }

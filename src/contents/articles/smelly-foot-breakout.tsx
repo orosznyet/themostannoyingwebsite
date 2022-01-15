@@ -1,8 +1,8 @@
 import { Article } from "@/types";
 
 export default {
-  slug: 'smelly-foot-berakout',
   title: 'Smelly foot breakout in the new Mars colony',
+  intro: 'It\'s so bad, we can\'t even open the windows here.',
   date: new Date('2021-11-24 18:31:00'),
   body: (
     <>

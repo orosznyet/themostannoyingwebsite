@@ -2,6 +2,7 @@ import React from "react";
 
 export interface ArticleCore {
   slug: string;
+  url: string;
   title: string;
   intro: string;
   isHighlighted?: boolean;
