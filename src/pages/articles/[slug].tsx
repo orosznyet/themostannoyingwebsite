@@ -22,8 +22,12 @@ const ArticleItem: NextPage<Props> = ({ slug }: Props) => {
     <main>
       <Head>
         <title>{article.title}</title>
+        <meta property="og:type" content="article" />
+        <meta name="og:description" content={article.intro || article.title} />
+        {article.coverImage && <meta property="og:image" content={article.coverImage} />}
       </Head>
       <h1>{article.title}</h1>
+      <span>Published on {article.date.toDateString()}</span>
       <LockedContent initialMaxHeight={200} active={showLocker}>
         {article.body}
       </LockedContent>

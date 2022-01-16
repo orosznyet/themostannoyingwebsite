@@ -56,8 +56,8 @@ const RegularListItem = styled.li`
 `;
 
 export default function Index() {
-  const coverArticle = ArticleService.getAllFiltered({isHighlighted: true})[0];
-  const articlePool = ArticleService.getAllFiltered({isHighlighted: false}).slice(0,12);
+  const coverArticle = ArticleService.getAllFiltered({isOnCover: true})[0];
+  const articlePool = ArticleService.getAllFiltered({isOnCover: false}).slice(0,12);
   const denseList = articlePool.slice(0,3);
   const regularList = articlePool.slice(3);
 

@@ -1,20 +1,15 @@
 import { Article } from "@/types";
 
 export default {
-  title: 'Monkey attack on the internet',
-  intro: 'British monkeys are spiking their activity on the internet. Let\'s see all what we know.',
-  date: new Date('2021-12-24 18:31:00'),
-  coverImage: '/assets/images/articles/monkey-attack/cover.jpg',
+  title: 'Shiba inues are more likely to commit crimes',
+  intro: 'By getting completely undeserved trearts from very strict owners.',
+  coverImage: '/assets/images/articles/inus-likely/cover.jpg',
+  date: new Date('2022-01-15 18:16:43'),
   isHighlighted: true,
-  isOnCover: true,
   body: (
     <>
       <p>
-        British monkeys are spiking their activity on the internet. Let's see all what we know.
-      </p>
-      <p>
-        Dolores, ex! Possimus assumenda ad labore voluptates quasi adipisci error, quisquam quam, enim cupiditate iure
-        aut corrupti necessitatibus nulla architecto alias facere molestias..
+        Wuff wuff, bark bark. - said the lead officer of the Shiba Inu treaty alliance thingie.
       </p>
       <p>
         Explicabo, voluptatum debitis aliquam eum quibusdam autem quas error omnis aliquid veritatis culpa provident

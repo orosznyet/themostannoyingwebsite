@@ -1,5 +1,6 @@
 import { Article } from '@/types';
 import DummyArticle from './articles/dummy-article';
+import InusLikely from './articles/inus-likely';
 import MonkeyAttack from './articles/monkey-attack';
 import SmellyFootBreakout from './articles/smelly-foot-breakout';
 
@@ -13,7 +14,7 @@ export const articles: Article[] = [
   DummyArticle,
   DummyArticle,
   DummyArticle,
-  DummyArticle,
+  InusLikely,
   DummyArticle,
   DummyArticle,
   DummyArticle,
