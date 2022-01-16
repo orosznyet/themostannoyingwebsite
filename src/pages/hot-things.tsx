@@ -27,7 +27,9 @@ const VideoPlayer = styled.video`
 
 const HotThings = () => {
   const [isCapable] = useState(
-    'mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices
+    typeof navigator !== 'undefined'
+    && 'mediaDevices' in navigator
+    && 'getUserMedia' in navigator.mediaDevices
   );
   const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
   const [isStreamStarted, setStreamStarted] = useState(false);

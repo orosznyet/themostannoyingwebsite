@@ -5,7 +5,6 @@ import { DarkTheme, DarkThemeStyle, LightTheme, LightThemeStyle } from "@/styles
 import { useBeforeUnload } from "react-use";
 import MatomoProvider from '@/components/analitics/MatomoProvider';
 import { Provider as ReduxProvider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
 import redux from '@/redux/store';
 import registerIcons from '@/utils/icons';
 import useFirstInteraction from '@/hooks/useFirstInteraction';
@@ -43,17 +42,16 @@ const Provider = ({ children }: Props) => {
     `I'd reconsider leaving before some bad things happend to you. Are you sure?`
   );
 
+  // PersistGate blocks SSR so we only mount it on the client side
   return (
     <ReduxProvider store={redux.store}>
-      <PersistGate loading={null} persistor={redux.persistor}>
-        <MatomoProvider>
-          {isDarkMode && <DarkThemeStyle />}
-          {!isDarkMode && <LightThemeStyle />}
-          <ThemeProvider theme={isDarkMode ? DarkTheme : LightTheme}>
-            {children}
-          </ThemeProvider>
-        </MatomoProvider>
-      </PersistGate>
+      <MatomoProvider>
+        {isDarkMode && <DarkThemeStyle />}
+        {!isDarkMode && <LightThemeStyle />}
+        <ThemeProvider theme={isDarkMode ? DarkTheme : LightTheme}>
+          {children}
+        </ThemeProvider>
+      </MatomoProvider>
     </ReduxProvider>
   )
 }

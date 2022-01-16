@@ -1,3 +1,4 @@
+import { isClientSide } from "@/utils/dom";
 import {useMemo, useEffect, useState} from "react";
 
 /**
@@ -8,6 +9,9 @@ import {useMemo, useEffect, useState} from "react";
  *   permission.
  */
 const useAudio = (url: string) => {
+  // Audio is only available on the client side, backend would fail.
+  if (!isClientSide()) { return null; }
+
   const audio = useMemo(() => new Audio(url), []);
   const [playing, setPlaying] = useState(false);
 

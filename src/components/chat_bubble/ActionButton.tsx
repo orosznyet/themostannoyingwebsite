@@ -1,6 +1,6 @@
 import useAudio from "@/hooks/useAudio";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { MouseEventHandler, useEffect, useRef, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import styled from "styled-components";
 import History from "@/components/chat_bubble/History";
 import { useAppSelector } from "@/redux/hooks";
@@ -81,7 +81,7 @@ const initialMessage = () => ({
 const ActionButton = () => {
   const enableSound = useAppSelector(selectEnableSound);
   const hasInteracted = useAppSelector(selectHasInteracted);
-  const [history, setHistory] = useState([initialMessage()] as HistoryItem[]);
+  const [history, setHistory] = useState<HistoryItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [badgeCounter, setBadgeCounter] = useState(1);
   const notificationSfx = useAudio("/assets/sfx/notification_chord1.wav");
@@ -92,7 +92,7 @@ const ActionButton = () => {
   };
 
   const playSound = () => {
-    if (!enableSound) { return; }
+    if (!enableSound || !notificationSfx) { return; }
     try {
       notificationSfx.play();
     } catch (e) {
@@ -129,6 +129,10 @@ const ActionButton = () => {
   }, [isOpen, hasInteracted]);
 
   useEffect(() => {
+    if (!history.length) {
+      setHistory([initialMessage()]);
+    }
+
     document.addEventListener("click", closeHistory)
     return () => {
       document.removeEventListener("click", closeHistory)
