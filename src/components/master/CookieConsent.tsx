@@ -1,17 +1,31 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { selectReviewCompleted, setReviewCompleted } from "@/redux/stores/consent";
+import { cssVars, ThemeProps } from "@/styles/theme";
+import Link from "next/link";
 import styled from "styled-components";
 
-const Wrap = styled.div`
+const Wrap = styled.div<{theme: ThemeProps}>`
   position: sticky;
-  bottom: 0;
+  bottom: -10px;
+  background: ${({ theme }) => theme.colors.surface};
+  box-shadow: 0 -2px 5px 2px rgba(0,0,0,0.4);
+  border: 1px solid ${cssVars.color.tertiary};
+  border-radius: ${cssVars.spacing.gap};
+  padding: ${cssVars.spacing.gap} ${cssVars.spacing.gap2x};
+`;
+const Disclaimer = styled.p``;
+const Actions = styled.div`
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: ${cssVars.spacing.gap};
 `;
 
 const CookieBar = () => {
   const dispatch = useAppDispatch()
   const completed = useAppSelector(selectReviewCompleted)
 
-  const handleCookieBar = () => {
+  const close = () => {
     dispatch(setReviewCompleted(true))
   };
 
@@ -19,10 +33,19 @@ const CookieBar = () => {
     <>
       {!completed && (
         <Wrap>
-          <p>
+          <Disclaimer>
             This website uses cookies to ensure you get the best experience on our website.
-          </p>
-          <button onClick={handleCookieBar}>Got it!</button>
+            It's also a joke so many of the features are buggy or doens't even work on purpose.
+            You can customize your experience and cookie settings in the settings menu.
+          </Disclaimer>
+          <Actions>
+            <Link href="/settings" passHref>
+              <a>
+                Settings
+              </a>
+            </Link>
+            <button onClick={close}>Got it!</button>
+          </Actions>
         </Wrap>
       )}
     </>

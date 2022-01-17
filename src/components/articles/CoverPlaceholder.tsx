@@ -34,8 +34,6 @@ type Props = {
 }
 
 const CoverPlaceholder = ({ width, height }: Props) => {
-  const isDarkMode = useAppSelector(selectDarkMode);
-
   return <>
     <Container width={width} height={height} />
   </>
