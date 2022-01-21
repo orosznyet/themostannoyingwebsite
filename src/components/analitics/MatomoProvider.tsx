@@ -2,7 +2,7 @@ import { MatomoProvider as MatomoProviderBase, createInstance } from '@datapunt/
 import AutoTrackingProvider from './AutoTrackingProvider';
 
 const instance = createInstance({
-  urlBase: 'https://themostannoyingwebsite.matomo.cloud',
+  urlBase: 'https://steaway.com',
   siteId: 1,
   disabled: false,
   heartBeat: {
